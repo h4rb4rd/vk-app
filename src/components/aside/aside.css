@@ -1,0 +1,75 @@
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+
+.aside {
+  grid-area: aside;
+  background-color: #0063b1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 10px;
+}
+.aside-menu {
+  margin: 0px 0px 70px 0px;
+}
+.aside-menu__list li:not(:last-child) {
+  margin: 0px 0px 20px 0px;
+}
+.aside-menu__list li:nth-child(4) {
+  margin: 0px 0px 40px 0px;
+}
+.aside-menu__link {
+  color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.aside-menu__link:hover {
+  text-decoration: underline;
+}
+.aside-menu__link.active {
+  color: #ffeb3b;
+}
+
+.aside-friends__title {
+  font-size: 16;
+  font-weight: 500;
+  color: #fff;
+  margin: 0px 0px 20px 0px;
+  padding: 0px 0px 0px 10px;
+}
+.aside-friends__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  overflow: hidden;
+}
+
+.aside-friend {
+  text-align: center;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin: 0px 40px 10px 0px;
+}
+
+.aside-friend__avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.aside-friend__name {
+  color: #222;
+  font-size: 16px;
+  font-weight: 500;
+}
+.aside-friend {
+  padding: 0px 0px 0px 0px;
+  margin: 0px 10px 40px 10px;
+}

@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "aboutMe": "я круто чувак 1001%",
+      "contacts": {
+        "facebook": "facebook.com",
+        "website": null,
+        "vk": "vk.com/dimych",
+        "twitter": "https://twitter.com/@sdf",
+        "instagram": "instagra.com/sds",
+        "youtube": null,
+        "github": "github.com",
+        "mainLink": null
+      },
+      "lookingForAJob": true,
+      "lookingForAJobDescription": "не ищу, а дурачусь",
+      "fullName": "samurai dimych",
+      "id": 2,
+      "photo": "https://www.shareicon.net/data/2016/05/24/770117_people_512x512.png"
+    }
+  ]
+}

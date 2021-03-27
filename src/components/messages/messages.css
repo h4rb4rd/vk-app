@@ -1,0 +1,140 @@
+.messages {
+  grid-area: main;
+  padding: 50px;
+  display: flex;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+/* menu */
+.messages-nav {
+  flex: 0 1 20%;
+  border-right: 2px solid #2979ff;
+  margin: 0px 30px 0px 0px;
+}
+
+.messages__title {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #222;
+  margin: 0px 0px 20px 0px;
+}
+.messages-users__list {
+  padding: 0px 20px 0px 20px;
+}
+.messages-nav__item {
+  margin: 0px 0px 20px 0px;
+}
+.messages-nav__item:before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0px 10px 0px 0px;
+  background-color: #2979ff;
+}
+
+.messages-nav__link {
+  color: #222;
+  font-size: 16px;
+}
+.messages-nav__link:hover {
+  text-decoration: underline;
+}
+
+.messages-nav__link.active {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* dialogs */
+.dialogs {
+  flex: 0 1 80%;
+}
+.dialogs-message {
+  display: flex;
+  flex-direction: column;
+  max-height: 70vh;
+  overflow: auto;
+  margin: 0px 0px 10px 0px;
+}
+
+.dialogs-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dialogs-form__textarea {
+  width: 80%;
+  height: 50px;
+  resize: none;
+  font-size: 16px;
+  padding: 10px;
+  border: none;
+  border: 2px solid #222;
+  margin: 0px 10px 00px 0px;
+  background-color: #e3f2fd;
+}
+
+.dialogs-form__button {
+  cursor: pointer;
+  width: 100px;
+  height: 35px;
+  border-radius: 10px;
+  border: none;
+  background-color: #2196f3;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease 0s;
+}
+.dialogs-form__button:hover {
+  background-color: #1565c0;
+}
+
+/* friend-message */
+.friend-message {
+  display: flex;
+  align-items: center;
+  margin: 0px 0px 40px 0px;
+}
+
+.friend-message__ava {
+  text-align: center;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin: 0px 40px 10px 0px;
+}
+
+.friend-message__ava img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.friend-message__name {
+  color: #222;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.friend-message__text {
+  background-color: #e3f2fd;
+  box-shadow: 0 0 5px rgba(13, 71, 161, 0.5);
+  padding: 30px;
+  font-size: 16px;
+  color: #222;
+}
+
+/* user-message */
+.user-message {
+  align-self: flex-end;
+  text-align: right;
+  background-color: #e3f2fd;
+  box-shadow: 0 0 5px rgba(13, 71, 161, 0.5);
+  padding: 30px;
+  font-size: 16px;
+  color: #222;
+  margin: 0px 20px 40px 0px;
+}

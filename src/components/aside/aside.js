@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './aside.css';
 
 const Aside = () => {
@@ -7,19 +8,19 @@ const Aside = () => {
       <nav className="aside__menu aside-menu">
         <ul className="aside-menu__list">
           <li>
-            <a href="#" className="aside-menu__link active">
+            <NavLink to="/profile" className="aside-menu__link">
               Profile
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="#" className="aside-menu__link ">
-              Users
-            </a>
+            <NavLink to="/friends" className="aside-menu__link ">
+              Friends
+            </NavLink>
           </li>
           <li>
-            <a href="#" className="aside-menu__link ">
+            <NavLink to="/Messages" className="aside-menu__link ">
               Messages
-            </a>
+            </NavLink>
           </li>
         </ul>
       </nav>

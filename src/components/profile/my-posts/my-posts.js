@@ -3,8 +3,15 @@ import './my-posts.css';
 import Post from './post';
 
 const MyPosts = () => {
+  const profileData = {
+    postData: [
+      { id: 1, postText: "It's my first post", like: 7 },
+      { id: 2, postText: 'Hi, how are you?', like: 3 },
+    ],
+  };
+
   return (
-    <>
+    <div>
       {/* form */}
       <form className="profile__form profile-form">
         <label className="profile-form__label" htmlFor="profile-form">
@@ -20,10 +27,13 @@ const MyPosts = () => {
       </form>
       {/* posts */}
       <div className="profile__posts">
-        <Post postText="It's my first post" likes="7" />
-        <Post postText="Hi, how are you?" likes="3" />
+        {profileData.postData.map((data) => {
+          return (
+            <Post postText={data.postText} likes={data.like} key={data.id} />
+          );
+        })}
       </div>
-    </>
+    </div>
   );
 };
 export default MyPosts;

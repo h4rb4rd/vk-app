@@ -1,0 +1,25 @@
+.messages-nav__item {
+  margin: 0px 0px 20px 0px;
+}
+.messages-nav__item:before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0px 10px 0px 0px;
+  background-color: #2979ff;
+}
+
+.messages-nav__link {
+  color: #222;
+  font-size: 16px;
+}
+.messages-nav__link:hover {
+  text-decoration: underline;
+}
+
+.messages-nav__link.active {
+  font-size: 18px;
+  font-weight: 500;
+}

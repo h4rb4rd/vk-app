@@ -8,15 +8,19 @@ import Profile from '../profile';
 import Friends from '../friends';
 import Messages from '../messages';
 
-const App = () => {
+const App = ({ state: { profile, messages } }) => {
+  const profilePage = () => <Profile profileData={profile} />;
+  const friendsPage = () => <Friends />;
+  const messagesPage = () => <Messages messagesData={messages} />;
+
   return (
     <BrowserRouter>
       <div className="app-wrapper">
         <Header />
         <Aside />
-        <Route component={Profile} path="/profile" />
-        <Route component={Friends} path="/friends" />
-        <Route component={Messages} path="/messages" />
+        <Route render={profilePage} path="/profile" />
+        <Route render={friendsPage} path="/friends" />
+        <Route component={messagesPage} path="/messages" />
       </div>
     </BrowserRouter>
   );

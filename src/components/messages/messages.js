@@ -1,75 +1,10 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import './messages.css';
 
-const NavItem = (props) => {
-  return (
-    <li className="messages-nav__item">
-      <NavLink to={`/messages/${props.id}`} className="messages-nav__link ">
-        {props.name}
-      </NavLink>
-    </li>
-  );
-};
+import NavItem from './nav-item';
+import MessageItem from './message-item';
 
-const MessageItem = (props) => {
-  return (
-    <div className="dialogs-message__item">
-      {/* friend-message */}
-      <div className="dialogs-message__friend friend-message">
-        <div className="friend-message__ava">
-          <a href="#">
-            <img
-              src="https://www.shareicon.net/data/512x512/2016/05/26/771189_man_512x512.png"
-              alt="ava"
-            />
-          </a>
-          <p className="friend-message__name">Andrew</p>
-        </div>
-        <p className="friend-message__text">{props.friendMessage}</p>
-      </div>
-      {/* user-message */}
-      <p className="dialogs-message__user user-message">user message 1</p>
-    </div>
-  );
-};
-const Messages = () => {
-  const messagesData = {
-    friendData: [
-      { id: 11, name: 'Andrew' },
-      { id: 12, name: 'Dmitry' },
-      { id: 13, name: 'Sasha' },
-      { id: 14, name: 'Valera' },
-      { id: 15, name: 'Ivan' },
-    ],
-    MessageData: [
-      {
-        id: 11,
-        message: 'I am normal pBlAblabl I can have text and everything',
-      },
-      {
-        id: 12,
-        message: 'I am a personal popover and I can have text and everything',
-      },
-      {
-        id: 13,
-        message: 'I am normal pBlAblabl I can have text and everything',
-      },
-      {
-        id: 14,
-        message: ' I am a personal popover and I can have text and everything',
-      },
-      {
-        id: 15,
-        message: 'I am normal pBlAblabl I can have text and everything',
-      },
-      {
-        id: 16,
-        message: ' I am a personal popover and I can have text and everything',
-      },
-    ],
-  };
-
+const Messages = ({ messagesData }) => {
   return (
     <main className="messages">
       {/* nav */}

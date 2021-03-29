@@ -2,14 +2,7 @@ import React from 'react';
 import './my-posts.css';
 import Post from './post';
 
-const MyPosts = () => {
-  const profileData = {
-    postData: [
-      { id: 1, postText: "It's my first post", like: 7 },
-      { id: 2, postText: 'Hi, how are you?', like: 3 },
-    ],
-  };
-
+const MyPosts = ({ postData }) => {
   return (
     <div>
       {/* form */}
@@ -27,7 +20,7 @@ const MyPosts = () => {
       </form>
       {/* posts */}
       <div className="profile__posts">
-        {profileData.postData.map((data) => {
+        {postData.map((data) => {
           return (
             <Post postText={data.postText} likes={data.like} key={data.id} />
           );

@@ -4,7 +4,7 @@ import './profile.css';
 import ProfileInfo from './profile-info';
 import MyPosts from './my-posts';
 
-const Profile = () => {
+const Profile = ({ profileData }) => {
   return (
     <main className="profile">
       {/* image */}
@@ -19,7 +19,7 @@ const Profile = () => {
         {/* user (ava+description)*/}
         <ProfileInfo />
         {/* posts */}
-        <MyPosts />
+        <MyPosts postData={profileData.postData} />
       </div>
     </main>
   );

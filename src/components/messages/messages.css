@@ -28,6 +28,10 @@
   flex: 0 1 80%;
 }
 .dialogs__container {
+  /* ? */
+  display: flex;
+  flex-direction: column;
+  /* ? */
   height: 67vh;
   overflow: auto;
 }
@@ -63,4 +67,16 @@
 }
 .dialogs-form__button:hover {
   background-color: #1565c0;
+}
+
+/* user-message ?*/
+.user-message {
+  align-self: flex-end;
+  text-align: right;
+  background-color: #e3f2fd;
+  box-shadow: 0 0 5px rgba(13, 71, 161, 0.5);
+  padding: 30px;
+  font-size: 16px;
+  color: #222;
+  margin: 0px 20px 40px 0px;
 }

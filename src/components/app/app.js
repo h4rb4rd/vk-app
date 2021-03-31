@@ -8,10 +8,22 @@ import Profile from '../profile';
 import Friends from '../friends';
 import Messages from '../messages';
 
-const App = ({ state: { profile, messages } }) => {
-  const profilePage = () => <Profile profileData={profile} />;
+const App = (props) => {
+  const profilePage = () => (
+    <Profile
+      profileData={props.state.profile}
+      onAddPost={props.onAddPost}
+      onPostTextUpdate={props.onPostTextUpdate}
+    />
+  );
   const friendsPage = () => <Friends />;
-  const messagesPage = () => <Messages messagesData={messages} />;
+  const messagesPage = () => (
+    <Messages
+      messagesData={props.state.messages}
+      onAddMessage={props.onAddMessage}
+      onMessageTextUpdate={props.onMessageTextUpdate}
+    />
+  );
 
   return (
     <BrowserRouter>
@@ -20,7 +32,7 @@ const App = ({ state: { profile, messages } }) => {
         <Aside />
         <Route render={profilePage} path="/profile" />
         <Route render={friendsPage} path="/friends" />
-        <Route component={messagesPage} path="/messages" />
+        <Route render={messagesPage} path="/messages" />
       </div>
     </BrowserRouter>
   );

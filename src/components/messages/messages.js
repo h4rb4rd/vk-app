@@ -4,14 +4,26 @@ import './messages.css';
 import NavItem from './nav-item';
 import MessageItem from './message-item';
 
-const Messages = ({ messagesData }) => {
+const Messages = ({
+  messagesData: { friendData, messageData, userMessageData, messageTextData },
+  onAddMessage,
+  onMessageTextUpdate,
+}) => {
+  const addMessage = () => {
+    onAddMessage();
+  };
+  const updateMessageText = (e) => {
+    let text = e.target.value;
+    onMessageTextUpdate(text);
+  };
+
   return (
     <main className="messages">
       {/* nav */}
       <nav className="messages__nav messages-nav">
         <h3 className="messages__title">Dialogs</h3>
         <ul className="messages-nav__list">
-          {messagesData.friendData.map((data) => {
+          {friendData.map((data) => {
             return <NavItem name={data.name} key={data.id} id={data.id} />;
           })}
         </ul>
@@ -20,13 +32,30 @@ const Messages = ({ messagesData }) => {
       <div className="messages__dialogs dialogs">
         <div className="dialogs__container">
           {/* dialog item*/}
-          {messagesData.MessageData.map((data) => {
+          {messageData.map((data) => {
             return <MessageItem friendMessage={data.message} key={data.id} />;
           })}
+          {/* user-message  ?*/}
+          {userMessageData.map((data) => {
+            return (
+              <p className="dialogs-message__user user-message" key={data.id}>
+                {data.messageText}
+              </p>
+            );
+          })}
         </div>
-        <form action="#" className="dialogs__form dialogs-form">
-          <textarea className="dialogs-form__textarea"></textarea>
-          <button type="button" className="dialogs-form__button">
+        <form className="dialogs__form dialogs-form">
+          <textarea
+            placeholder="Enter Your Message"
+            className="dialogs-form__textarea"
+            value={messageTextData}
+            onChange={updateMessageText}
+          />
+          <button
+            type="button"
+            className="dialogs-form__button"
+            onClick={addMessage}
+          >
             Send
           </button>
         </form>

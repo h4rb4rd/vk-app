@@ -2,7 +2,17 @@ import React from 'react';
 import './my-posts.css';
 import Post from './post';
 
-const MyPosts = ({ postData }) => {
+const MyPosts = ({ postData, postTextData, onAddPost, onPostTextUpdate }) => {
+  // ==============
+  const addPost = () => {
+    onAddPost();
+  };
+  const updatePostText = (e) => {
+    let text = e.target.value;
+    onPostTextUpdate(text);
+  };
+  // ==============
+
   return (
     <div>
       {/* form */}
@@ -13,8 +23,14 @@ const MyPosts = ({ postData }) => {
         <textarea
           placeholder="Enter Your Message"
           className="profile-form__textarea"
+          value={postTextData}
+          onChange={updatePostText}
         />
-        <button type="button" className="profile-form__button">
+        <button
+          type="button"
+          className="profile-form__button"
+          onClick={addPost}
+        >
           Add post
         </button>
       </form>

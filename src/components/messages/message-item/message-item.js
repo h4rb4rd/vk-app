@@ -17,8 +17,7 @@ const MessageItem = (props) => {
         </div>
         <p className="friend-message__text">{props.friendMessage}</p>
       </div>
-      {/* user-message */}
-      <p className="dialogs-message__user user-message">user message 1</p>
+      {/* user-message  ?*/}
     </div>
   );
 };

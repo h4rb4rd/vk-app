@@ -1,29 +1,24 @@
-import state from './redux/store';
-import { rerender } from './render';
-rerender(state);
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
 
-// import './index.css';
+import App from './components/app';
+import store from './redux/store';
 
-// import App from './components/app';
-// import state, {
-//   onAddPost,
-//   onPostTextUpdate,
-//   onAddMessage,
-//   onMessageTextUpdate,
-// } from './redux/store';
+const rerender = (state) => {
+  ReactDOM.render(
+    <React.StrictMode>
+      <App
+        state={state}
+        onAddPost={store.onAddPost.bind(store)}
+        onPostTextUpdate={store.onPostTextUpdate.bind(store)}
+        onAddMessage={store.onAddMessage.bind(store)}
+        onMessageTextUpdate={store.onMessageTextUpdate.bind(store)}
+      />
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+};
+rerender(store.getState());
 
-// export const rerender = () => {
-//   ReactDOM.render(
-//     <React.StrictMode>
-//       <App
-//         state={state}
-//         onAddPost={onAddPost}
-//         onPostTextUpdate={onPostTextUpdate}
-//         onAddMessage={onAddMessage}
-//         onMessageTextUpdate={onMessageTextUpdate}
-//       />
-//     </React.StrictMode>,
-//     document.getElementById('root')
-//   );
-// };
-// rerender();
+store.subscribe(rerender);

@@ -2,14 +2,16 @@ import React from 'react';
 import './my-posts.css';
 import Post from './post';
 
-const MyPosts = ({ postData, postTextData, onAddPost, onPostTextUpdate }) => {
+import { addPostAC, updatePostTextAC } from '../../../redux/store';
+
+const MyPosts = ({ postData, postTextData, dispatch }) => {
   // ==============
   const addPost = () => {
-    onAddPost();
+    dispatch(addPostAC());
   };
   const updatePostText = (e) => {
     let text = e.target.value;
-    onPostTextUpdate(text);
+    dispatch(updatePostTextAC(text));
   };
   // ==============
 

@@ -1,4 +1,32 @@
-let idMax = 100;
+const Actions = {
+  UPDATE_POST_TEXT: 'UPDATE-POST-TEXT',
+  UPDATE_MESSAGE_TEXT: 'UPDATE-MESSAGE-TEXT',
+  ADD_POST: 'ADD-POST',
+  ADD_MESSAGE: 'ADD-MESSAGE',
+};
+
+export const updatePostTextAC = (text) => {
+  return {
+    type: Actions.UPDATE_POST_TEXT,
+    text,
+  };
+};
+export const updateMessageTextAC = (text) => {
+  return {
+    type: Actions.UPDATE_MESSAGE_TEXT,
+    text,
+  };
+};
+export const addPostAC = () => {
+  return {
+    type: Actions.ADD_POST,
+  };
+};
+export const addMessageAC = () => {
+  return {
+    type: Actions.ADD_MESSAGE,
+  };
+};
 
 const store = {
   idMax: 100,
@@ -38,28 +66,30 @@ const store = {
       messageTextData: '',
     },
   },
+
   getState() {
     return this._state;
-  },
-  _rerender() {
-    console.log('state update');
   },
 
   subscribe(observer) {
     this._rerender = observer;
   },
 
-  onPostTextUpdate(text) {
+  _rerender() {
+    console.log('state update');
+  },
+
+  _onPostTextUpdate(text) {
     this._state.profile.postTextData = text;
     this._rerender(this._state);
   },
 
-  onMessageTextUpdate(text) {
+  _onMessageTextUpdate(text) {
     this._state.messages.messageTextData = text;
     this._rerender(this._state);
   },
 
-  onAddPost() {
+  _onAddPost() {
     const newObj = {
       id: this.idMax++,
       postText: this._state.profile.postTextData,
@@ -70,7 +100,7 @@ const store = {
     this._rerender(this._state);
   },
 
-  onAddMessage() {
+  _onAddMessage() {
     const newObj = {
       id: this.idMax++,
       messageText: this._state.messages.messageTextData,
@@ -78,6 +108,21 @@ const store = {
     this._state.messages.userMessageData.push(newObj);
     this._state.messages.messageTextData = '';
     this._rerender(this._state);
+  },
+
+  dispatch(action) {
+    switch (action.type) {
+      case Actions.UPDATE_POST_TEXT:
+        return this._onPostTextUpdate(action.text);
+      case Actions.UPDATE_MESSAGE_TEXT:
+        return this._onMessageTextUpdate(action.text);
+      case Actions.ADD_POST:
+        return this._onAddPost();
+      case Actions.ADD_MESSAGE:
+        return this._onAddMessage();
+      default:
+        return this.state;
+    }
   },
 };
 

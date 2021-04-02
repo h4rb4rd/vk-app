@@ -10,19 +10,11 @@ import Messages from '../messages';
 
 const App = (props) => {
   const profilePage = () => (
-    <Profile
-      profileData={props.state.profile}
-      onAddPost={props.onAddPost}
-      onPostTextUpdate={props.onPostTextUpdate}
-    />
+    <Profile profileData={props.state.profile} dispatch={props.dispatch} />
   );
   const friendsPage = () => <Friends />;
   const messagesPage = () => (
-    <Messages
-      messagesData={props.state.messages}
-      onAddMessage={props.onAddMessage}
-      onMessageTextUpdate={props.onMessageTextUpdate}
-    />
+    <Messages messagesData={props.state.messages} dispatch={props.dispatch} />
   );
 
   return (

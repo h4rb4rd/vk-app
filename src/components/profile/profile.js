@@ -4,7 +4,7 @@ import './profile.css';
 import ProfileInfo from './profile-info';
 import MyPosts from './my-posts';
 
-const Profile = ({ profileData, onAddPost, onPostTextUpdate }) => {
+const Profile = ({ profileData, dispatch }) => {
   return (
     <main className="profile">
       {/* image */}
@@ -22,8 +22,7 @@ const Profile = ({ profileData, onAddPost, onPostTextUpdate }) => {
         <MyPosts
           postData={profileData.postData}
           postTextData={profileData.postTextData}
-          onAddPost={onAddPost}
-          onPostTextUpdate={onPostTextUpdate}
+          dispatch={dispatch}
         />
       </div>
     </main>

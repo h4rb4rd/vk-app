@@ -3,20 +3,15 @@ const Actions = {
   ADD_POST: 'ADD-POST',
 };
 
-export const updatePostTextAC = (text) => {
-  return {
-    type: Actions.UPDATE_POST_TEXT,
-    text,
-  };
+const initialState = {
+  postData: [
+    { id: 1, postText: "It's my first post", like: 7 },
+    { id: 2, postText: 'Hi, how are you?', like: 3 },
+  ],
+  postTextData: '',
 };
 
-export const addPostAC = () => {
-  return {
-    type: Actions.ADD_POST,
-  };
-};
-
-const profileReducer = (state, action) => {
+const profileReducer = (state = initialState, action) => {
   let idMax = 100;
 
   switch (action.type) {
@@ -34,6 +29,19 @@ const profileReducer = (state, action) => {
     default:
       return state;
   }
+};
+
+export const updatePostTextAC = (text) => {
+  return {
+    type: Actions.UPDATE_POST_TEXT,
+    text,
+  };
+};
+
+export const addPostAC = () => {
+  return {
+    type: Actions.ADD_POST,
+  };
 };
 
 export default profileReducer;

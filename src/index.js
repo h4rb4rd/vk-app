@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 import App from './components/app';
-import store from './redux/store';
+import store from './redux/redux-store';
 
 const rerender = (state) => {
   ReactDOM.render(
@@ -15,4 +15,7 @@ const rerender = (state) => {
 };
 rerender(store.getState());
 
-store.subscribe(rerender);
+store.subscribe(() => {
+  const state = store.getState();
+  rerender(state);
+});

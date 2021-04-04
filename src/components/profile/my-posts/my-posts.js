@@ -2,7 +2,7 @@ import React from 'react';
 import './my-posts.css';
 import Post from './post';
 
-import { addPostAC, updatePostTextAC } from '../../../redux/store';
+import { addPostAC, updatePostTextAC } from '../../../redux/profile-reducer';
 
 const MyPosts = ({ postData, postTextData, dispatch }) => {
   // ==============

@@ -4,7 +4,10 @@ import './messages.css';
 import NavItem from './nav-item';
 import MessageItem from './message-item';
 
-import { addMessageAC, updateMessageTextAC } from '../../redux/store';
+import {
+  addMessageAC,
+  updateMessageTextAC,
+} from '../../redux/messages-reducer';
 
 const Messages = ({
   messagesData: { friendData, messageData, userMessageData, messageTextData },
@@ -46,6 +49,7 @@ const Messages = ({
             );
           })}
         </div>
+        {/* form */}
         <form className="dialogs__form dialogs-form">
           <textarea
             placeholder="Enter Your Message"

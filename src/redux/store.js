@@ -1,36 +1,7 @@
-const Actions = {
-  UPDATE_POST_TEXT: 'UPDATE-POST-TEXT',
-  UPDATE_MESSAGE_TEXT: 'UPDATE-MESSAGE-TEXT',
-  ADD_POST: 'ADD-POST',
-  ADD_MESSAGE: 'ADD-MESSAGE',
-};
-
-export const updatePostTextAC = (text) => {
-  return {
-    type: Actions.UPDATE_POST_TEXT,
-    text,
-  };
-};
-export const updateMessageTextAC = (text) => {
-  return {
-    type: Actions.UPDATE_MESSAGE_TEXT,
-    text,
-  };
-};
-export const addPostAC = () => {
-  return {
-    type: Actions.ADD_POST,
-  };
-};
-export const addMessageAC = () => {
-  return {
-    type: Actions.ADD_MESSAGE,
-  };
-};
+import profileReducer from './profile-reducer';
+import messagesReducer from './messages-reducer';
 
 const store = {
-  idMax: 100,
-
   _state: {
     profile: {
       postData: [
@@ -79,50 +50,10 @@ const store = {
     console.log('state update');
   },
 
-  _onPostTextUpdate(text) {
-    this._state.profile.postTextData = text;
-    this._rerender(this._state);
-  },
-
-  _onMessageTextUpdate(text) {
-    this._state.messages.messageTextData = text;
-    this._rerender(this._state);
-  },
-
-  _onAddPost() {
-    const newObj = {
-      id: this.idMax++,
-      postText: this._state.profile.postTextData,
-      like: 0,
-    };
-    this._state.profile.postData.push(newObj);
-    this._state.profile.postTextData = '';
-    this._rerender(this._state);
-  },
-
-  _onAddMessage() {
-    const newObj = {
-      id: this.idMax++,
-      messageText: this._state.messages.messageTextData,
-    };
-    this._state.messages.userMessageData.push(newObj);
-    this._state.messages.messageTextData = '';
-    this._rerender(this._state);
-  },
-
   dispatch(action) {
-    switch (action.type) {
-      case Actions.UPDATE_POST_TEXT:
-        return this._onPostTextUpdate(action.text);
-      case Actions.UPDATE_MESSAGE_TEXT:
-        return this._onMessageTextUpdate(action.text);
-      case Actions.ADD_POST:
-        return this._onAddPost();
-      case Actions.ADD_MESSAGE:
-        return this._onAddMessage();
-      default:
-        return this.state;
-    }
+    this._state.profile = profileReducer(this._state.profile, action);
+    this._state.messages = messagesReducer(this._state.messages, action);
+    this._rerender(this._state);
   },
 };
 

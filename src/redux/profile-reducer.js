@@ -22,6 +22,7 @@ const profileReducer = (state = initialState, action) => {
       const newObj = {
         id: idMax++,
         postText: state.postTextData,
+        like: 0,
       };
       state.postData.push(newObj);
       state.postTextData = '';

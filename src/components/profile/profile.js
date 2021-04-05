@@ -2,7 +2,7 @@ import React from 'react';
 import './profile.css';
 
 import ProfileInfo from './profile-info';
-import MyPosts from './my-posts';
+import MyPostsContainer from './my-posts';
 
 const Profile = ({ profileData, dispatch }) => {
   return (
@@ -19,7 +19,7 @@ const Profile = ({ profileData, dispatch }) => {
         {/* user (ava+description)*/}
         <ProfileInfo />
         {/* posts */}
-        <MyPosts
+        <MyPostsContainer
           postData={profileData.postData}
           postTextData={profileData.postTextData}
           dispatch={dispatch}

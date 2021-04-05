@@ -6,7 +6,7 @@ import Header from '../header';
 import Aside from '../aside';
 import Profile from '../profile';
 import Friends from '../friends';
-import Messages from '../messages';
+import MessagesContainer from '../messages';
 
 const App = (props) => {
   const profilePage = () => (
@@ -14,7 +14,10 @@ const App = (props) => {
   );
   const friendsPage = () => <Friends />;
   const messagesPage = () => (
-    <Messages messagesData={props.state.messages} dispatch={props.dispatch} />
+    <MessagesContainer
+      messagesData={props.state.messages}
+      dispatch={props.dispatch}
+    />
   );
 
   return (

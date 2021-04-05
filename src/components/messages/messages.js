@@ -4,24 +4,14 @@ import './messages.css';
 import NavItem from './nav-item';
 import MessageItem from './message-item';
 
-import {
-  addMessageAC,
-  updateMessageTextAC,
-} from '../../redux/messages-reducer';
-
 const Messages = ({
-  messagesData: { friendData, messageData, userMessageData, messageTextData },
-  dispatch,
+  friendData,
+  messageData,
+  userMessageData,
+  messageTextData,
+  addMessage,
+  updateMessageText,
 }) => {
-  // ==============
-  const addMessage = () => {
-    dispatch(addMessageAC());
-  };
-  const updateMessageText = (e) => {
-    let text = e.target.value;
-    dispatch(updateMessageTextAC(text));
-  };
-  // ==============
   return (
     <main className="messages">
       {/* nav */}

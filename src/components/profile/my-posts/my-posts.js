@@ -2,19 +2,7 @@ import React from 'react';
 import './my-posts.css';
 import Post from './post';
 
-import { addPostAC, updatePostTextAC } from '../../../redux/profile-reducer';
-
-const MyPosts = ({ postData, postTextData, dispatch }) => {
-  // ==============
-  const addPost = () => {
-    dispatch(addPostAC());
-  };
-  const updatePostText = (e) => {
-    let text = e.target.value;
-    dispatch(updatePostTextAC(text));
-  };
-  // ==============
-
+const MyPosts = ({ postData, postTextData, addPost, updatePostText }) => {
   return (
     <div>
       {/* form */}

@@ -4,7 +4,7 @@ import './profile.css';
 import ProfileInfo from './profile-info';
 import MyPostsContainer from './my-posts';
 
-const Profile = ({ profileData, dispatch }) => {
+const Profile = (props) => {
   return (
     <main className="profile">
       {/* image */}
@@ -19,11 +19,7 @@ const Profile = ({ profileData, dispatch }) => {
         {/* user (ava+description)*/}
         <ProfileInfo />
         {/* posts */}
-        <MyPostsContainer
-          postData={profileData.postData}
-          postTextData={profileData.postTextData}
-          dispatch={dispatch}
-        />
+        <MyPostsContainer store={props.store} />
       </div>
     </main>
   );

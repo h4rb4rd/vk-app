@@ -9,16 +9,9 @@ import Friends from '../friends';
 import MessagesContainer from '../messages';
 
 const App = (props) => {
-  const profilePage = () => (
-    <Profile profileData={props.state.profile} dispatch={props.dispatch} />
-  );
+  const profilePage = () => <Profile store={props.store} />;
   const friendsPage = () => <Friends />;
-  const messagesPage = () => (
-    <MessagesContainer
-      messagesData={props.state.messages}
-      dispatch={props.dispatch}
-    />
-  );
+  const messagesPage = () => <MessagesContainer store={props.store} />;
 
   return (
     <BrowserRouter>

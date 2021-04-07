@@ -1,33 +1,33 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Messages from './messages';
-
 import {
   addMessageAC,
   updateMessageTextAC,
 } from '../../redux/messages-reducer';
 
-const MessagesContainer = ({
-  messagesData: { friendData, messageData, userMessageData, messageTextData },
-  dispatch,
-}) => {
-  const addMessage = () => {
-    dispatch(addMessageAC());
+const mapStateToProps = (state) => {
+  return {
+    messageData: state.messages.messageData,
+    friendData: state.messages.friendData,
+    userMessageData: state.messages.userMessageData,
+    messageTextData: state.messages.messageTextData,
   };
-  const updateMessageText = (e) => {
-    let text = e.target.value;
-    dispatch(updateMessageTextAC(text));
-  };
-  return (
-    <Messages
-      friendData={friendData}
-      messageData={messageData}
-      userMessageData={userMessageData}
-      messageTextData={messageTextData}
-      addMessage={addMessage}
-      updateMessageText={updateMessageText}
-    />
-  );
 };
-
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateMessageText: (e) => {
+      let text = e.target.value;
+      dispatch(updateMessageTextAC(text));
+    },
+    addMessage: () => {
+      dispatch(addMessageAC());
+    },
+  };
+};
+const MessagesContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Messages);
 export default MessagesContainer;

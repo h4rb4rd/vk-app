@@ -15,18 +15,23 @@ const profileReducer = (state = initialState, action) => {
   let idMax = 100;
 
   switch (action.type) {
-    case Actions.UPDATE_POST_TEXT:
-      state.postTextData = action.text;
-      return state;
-    case Actions.ADD_POST:
+    case Actions.UPDATE_POST_TEXT: {
+      let stateCopy = { ...state };
+      stateCopy.postTextData = action.text;
+      return stateCopy;
+    }
+    case Actions.ADD_POST: {
       const newObj = {
         id: idMax++,
         postText: state.postTextData,
         like: 0,
       };
-      state.postData.push(newObj);
-      state.postTextData = '';
-      return state;
+      let stateCopy = { ...state };
+      stateCopy.postData = [...state.postData];
+      stateCopy.postData.push(newObj);
+      stateCopy.postTextData = '';
+      return stateCopy;
+    }
     default:
       return state;
   }

@@ -11,27 +11,25 @@ const initialState = {
   postTextData: '',
 };
 
-const profileReducer = (state = initialState, action) => {
-  let idMax = 100;
+let idMax = 100;
 
+const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case Actions.UPDATE_POST_TEXT: {
-      let stateCopy = { ...state };
-      stateCopy.postTextData = action.text;
-      return stateCopy;
-    }
-    case Actions.ADD_POST: {
+    case Actions.UPDATE_POST_TEXT:
+      return { ...state, postTextData: action.text };
+
+    case Actions.ADD_POST:
       const newObj = {
         id: idMax++,
         postText: state.postTextData,
         like: 0,
       };
-      let stateCopy = { ...state };
-      stateCopy.postData = [...state.postData];
-      stateCopy.postData.push(newObj);
-      stateCopy.postTextData = '';
-      return stateCopy;
-    }
+      return {
+        ...state,
+        postData: [...state.postData, newObj],
+        postTextData: '',
+      };
+
     default:
       return state;
   }

@@ -5,6 +5,7 @@
   background-color: #fff;
   padding: 50px;
   min-height: 100vh;
+  text-align: center;
 }
 
 .friends__container {
@@ -46,6 +47,7 @@
   background-color: #0165b8;
 }
 .friends-data {
+  text-align: left;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -62,4 +64,18 @@
 
 .selected-page {
   font-weight: bold;
+}
+
+.friends__btn {
+  background-color: #007ee5;
+  min-width: 170px;
+  min-height: 50px;
+  border-radius: 10px;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+.friends__btn:hover {
+  background-color: #0165b8;
 }

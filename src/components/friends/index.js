@@ -1,2 +1,2 @@
-import Friends from './friends';
-export default Friends;
+import FriendsContainer from './friends-container';
+export default FriendsContainer;

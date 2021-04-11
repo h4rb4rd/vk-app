@@ -1,5 +1,5 @@
 import * as axios from 'axios';
-import React from 'react';
+import React, { Component } from 'react';
 import './friends.css';
 
 import avatar from '../../assets/images/avatar.png';
@@ -55,34 +55,32 @@ const Friend = ({
   );
 };
 
-const Friends = ({ friends, follow, unfollow, setFriends }) => {
-  const getFriends = () => {
-    if (friends.length === 0) {
-      axios
-        .get('https://social-network.samuraijs.com/api/1.0/users/')
-        .then((res) => {
-          setFriends(res.data.items);
-        });
-    }
-  };
+export default class Friends extends Component {
+  componentDidMount() {
+    axios
+      .get('https://social-network.samuraijs.com/api/1.0/users/')
+      .then((res) => {
+        this.props.setFriends(res.data.items);
+      });
+  }
 
-  return (
-    <main className="friends">
-      {friends.map((friend) => {
-        return (
-          <Friend
-            friend={friend}
-            key={friend.id}
-            follow={follow}
-            unfollow={unfollow}
-          />
-        );
-      })}
+  render() {
+    const { friends, follow, unfollow } = this.props;
+    return (
+      <main className="friends">
+        {friends.map((friend) => {
+          return (
+            <Friend
+              friend={friend}
+              key={friend.id}
+              follow={follow}
+              unfollow={unfollow}
+            />
+          );
+        })}
 
-      <button className="friends__btn" onClick={getFriends}>
-        Get Friends
-      </button>
-    </main>
-  );
-};
-export default Friends;
+        <button className="friends__btn">Get Friends</button>
+      </main>
+    );
+  }
+}

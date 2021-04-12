@@ -1,6 +1,4 @@
 .friends {
-  max-width: 100vh;
-  overflow: hidden;
   grid-area: main;
   background-color: #fff;
   padding: 50px;
@@ -64,9 +62,21 @@
 
 .selected-page {
   font-weight: bold;
+  color: #0063b1;
+  font-size: 18px;
 }
-
-.friends__btn {
+.friends__pagination {
+  max-width: 500px;
+  max-height: 20px;
+  overflow-y: hidden;
+  word-wrap: break-word;
+  margin: 0 auto;
+}
+.friends__pagination span {
+  display: inline-block;
+  margin: 0px 5px 10px 0px;
+}
+/* .friends__btn {
   background-color: #007ee5;
   min-width: 170px;
   min-height: 50px;
@@ -78,4 +88,4 @@
 }
 .friends__btn:hover {
   background-color: #0165b8;
-}
+} */

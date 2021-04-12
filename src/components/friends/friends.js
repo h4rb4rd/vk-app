@@ -58,14 +58,40 @@ const Friend = ({
 export default class Friends extends Component {
   componentDidMount() {
     axios
-      .get('https://social-network.samuraijs.com/api/1.0/users/')
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+      )
+      .then((res) => {
+        this.props.setFriends(res.data.items);
+        this.props.setUsersCount(res.data.totalCount);
+      });
+  }
+  onPageChange = (page) => {
+    this.props.setPage(page);
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`
+      )
       .then((res) => {
         this.props.setFriends(res.data.items);
       });
-  }
-
+  };
   render() {
-    const { friends, follow, unfollow } = this.props;
+    const {
+      friends,
+      follow,
+      unfollow,
+      pageSize,
+      totalCount,
+      currentPage,
+    } = this.props;
+
+    const pagesCount = Math.ceil(totalCount / pageSize);
+    const pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+      pages.push(i);
+    }
+
     return (
       <main className="friends">
         {friends.map((friend) => {
@@ -79,7 +105,27 @@ export default class Friends extends Component {
           );
         })}
 
-        <button className="friends__btn">Get Friends</button>
+        {/* <button className="friends__btn">Get Friends</button> */}
+        <div className="friends__pagination">
+          {pages.map((pageNumber) => {
+            return (
+              <span
+                onClick={() => {
+                  this.onPageChange(pageNumber);
+                }}
+                key={pageNumber}
+                className={currentPage === pageNumber ? 'selected-page' : ''}
+              >
+                {pageNumber}
+              </span>
+            );
+          })}
+          {/* <span className="selected-page">1</span>&nbsp;
+          <span>2</span>&nbsp;
+          <span>3</span>&nbsp;
+          <span>4</span>&nbsp;
+          <span>5</span> */}
+        </div>
       </main>
     );
   }

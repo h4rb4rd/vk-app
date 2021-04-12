@@ -6,11 +6,16 @@ import {
   followAC,
   unfollowAC,
   setFriendsAC,
+  setPageAC,
+  setUsersCountAC,
 } from '../../redux/friends-reducer';
 
 const mapStateToProps = (state) => {
   return {
     friends: state.friends.friendsData,
+    pageSize: state.friends.pageSize,
+    totalCount: state.friends.totalCount,
+    currentPage: state.friends.currentPage,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -23,6 +28,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     setFriends: (friends) => {
       dispatch(setFriendsAC(friends));
+    },
+    setPage: (page) => {
+      dispatch(setPageAC(page));
+    },
+    setUsersCount: (count) => {
+      dispatch(setUsersCountAC(count));
     },
   };
 };

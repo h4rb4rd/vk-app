@@ -2,6 +2,8 @@ const Actions = {
   FOLLOW: 'FOLLOW',
   UNFOLLOW: 'UNFOLLOW',
   SET_FRIENDS: 'SET_FRIENDS',
+  SET_PAGE: 'SET_PAGE',
+  FRIENDS_COUNT: 'FRIENDS_COUNT',
 };
 
 const initialState = {
@@ -68,9 +70,9 @@ const initialState = {
   //     },
   //   },
   // ],
-  totalCount: 5,
+  totalCount: 0,
   error: null,
-  pageSize: 4,
+  pageSize: 5,
   currentPage: 1,
   isFetching: false,
 };
@@ -103,6 +105,16 @@ const friendsReducer = (state = initialState, action) => {
         ...state,
         friendsData: action.friends,
       };
+    case Actions.FRIENDS_COUNT:
+      return {
+        ...state,
+        totalCount: action.count,
+      };
+    case Actions.SET_PAGE:
+      return {
+        ...state,
+        currentPage: action.page,
+      };
     default:
       return state;
   }
@@ -124,6 +136,18 @@ export const setFriendsAC = (friends) => {
   return {
     type: Actions.SET_FRIENDS,
     friends,
+  };
+};
+export const setUsersCountAC = (count) => {
+  return {
+    type: Actions.FRIENDS_COUNT,
+    count,
+  };
+};
+export const setPageAC = (page) => {
+  return {
+    type: Actions.SET_PAGE,
+    page,
   };
 };
 

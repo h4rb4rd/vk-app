@@ -4,6 +4,7 @@ const Actions = {
   SET_FRIENDS: 'SET_FRIENDS',
   SET_PAGE: 'SET_PAGE',
   FRIENDS_COUNT: 'FRIENDS_COUNT',
+  TOGGLE_IS_FETCHING: 'TOGGLE_IS_FETCHING',
 };
 
 const initialState = {
@@ -72,7 +73,7 @@ const initialState = {
   // ],
   totalCount: 0,
   error: null,
-  pageSize: 5,
+  pageSize: 4,
   currentPage: 1,
   isFetching: false,
 };
@@ -115,6 +116,11 @@ const friendsReducer = (state = initialState, action) => {
         ...state,
         currentPage: action.page,
       };
+    case Actions.TOGGLE_IS_FETCHING:
+      return {
+        ...state,
+        isFetching: action.isFetching,
+      };
     default:
       return state;
   }
@@ -150,5 +156,10 @@ export const setPageAC = (page) => {
     page,
   };
 };
-
+export const toggleIsFetchingAC = (isFetching) => {
+  return {
+    type: Actions.TOGGLE_IS_FETCHING,
+    isFetching,
+  };
+};
 export default friendsReducer;

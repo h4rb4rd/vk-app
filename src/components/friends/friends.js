@@ -1,14 +1,10 @@
-import * as axios from 'axios';
-import React, { Component } from 'react';
+import React from 'react';
 import './friends.css';
 
 import avatar from '../../assets/images/avatar.png';
+import preloader from '../../assets/images/preloader.svg';
 
-const Friend = ({
-  friend: { id, photo, name, status, followed },
-  follow,
-  unfollow,
-}) => {
+const Friend = ({ friend: { id, photo, name, status, followed }, follow, unfollow }) => {
   return (
     <div className="friends__container">
       {/* user */}
@@ -55,78 +51,40 @@ const Friend = ({
   );
 };
 
-export default class Friends extends Component {
-  componentDidMount() {
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      )
-      .then((res) => {
-        this.props.setFriends(res.data.items);
-        this.props.setUsersCount(res.data.totalCount);
-      });
+const Friends = ({ friends, follow, unfollow, currentPage, onPageChange, totalCount, pageSize, isFetching }) => {
+  const pagesCount = Math.ceil(totalCount / pageSize);
+  const pages = [];
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i);
   }
-  onPageChange = (page) => {
-    this.props.setPage(page);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`
-      )
-      .then((res) => {
-        this.props.setFriends(res.data.items);
-      });
-  };
-  render() {
-    const {
-      friends,
-      follow,
-      unfollow,
-      pageSize,
-      totalCount,
-      currentPage,
-    } = this.props;
 
-    const pagesCount = Math.ceil(totalCount / pageSize);
-    const pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-      pages.push(i);
-    }
+  return (
+    <main className="friends">
+      {isFetching ? <img src={preloader} alt="preloader" className="preloader" /> : null}
 
-    return (
-      <main className="friends">
-        {friends.map((friend) => {
+      {!isFetching
+        ? friends.map((friend) => {
+            return <Friend friend={friend} key={friend.id} follow={follow} unfollow={unfollow} />;
+          })
+        : null}
+
+      {/* <button className="friends__btn">Get Friends</button> */}
+      <div className="friends__pagination">
+        {pages.map((pageNumber) => {
           return (
-            <Friend
-              friend={friend}
-              key={friend.id}
-              follow={follow}
-              unfollow={unfollow}
-            />
+            <span
+              onClick={() => {
+                onPageChange(pageNumber);
+              }}
+              key={pageNumber}
+              className={currentPage === pageNumber ? 'selected-page' : ''}
+            >
+              {pageNumber}
+            </span>
           );
         })}
-
-        {/* <button className="friends__btn">Get Friends</button> */}
-        <div className="friends__pagination">
-          {pages.map((pageNumber) => {
-            return (
-              <span
-                onClick={() => {
-                  this.onPageChange(pageNumber);
-                }}
-                key={pageNumber}
-                className={currentPage === pageNumber ? 'selected-page' : ''}
-              >
-                {pageNumber}
-              </span>
-            );
-          })}
-          {/* <span className="selected-page">1</span>&nbsp;
-          <span>2</span>&nbsp;
-          <span>3</span>&nbsp;
-          <span>4</span>&nbsp;
-          <span>5</span> */}
-        </div>
-      </main>
-    );
-  }
-}
+      </div>
+    </main>
+  );
+};
+export default Friends;

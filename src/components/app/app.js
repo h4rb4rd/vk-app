@@ -5,11 +5,13 @@ import './app.css';
 import Header from '../header';
 import Aside from '../aside';
 import Profile from '../profile';
+import FriendProfileContainer from '../friend-profile';
 import Friends from '../friends';
 import MessagesContainer from '../messages';
 
 const App = (props) => {
   const profilePage = () => <Profile store={props.store} />;
+  const friendProfilePage = () => <FriendProfileContainer />;
   const friendsPage = () => <Friends />;
   const messagesPage = () => <MessagesContainer store={props.store} />;
 
@@ -19,6 +21,7 @@ const App = (props) => {
         <Header />
         <Aside />
         <Route render={profilePage} path="/profile" />
+        <Route render={friendProfilePage} path="/friend-profile" />
         <Route render={friendsPage} path="/friends" />
         <Route render={messagesPage} path="/messages" />
       </div>

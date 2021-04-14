@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './friends.css';
 
 import avatar from '../../assets/images/avatar.png';
@@ -11,9 +12,9 @@ const Friend = ({ friend: { id, photo, name, status, followed }, follow, unfollo
 
       <div className="friends__user friends-user">
         <div className="friends-user__ava">
-          <a href="#">
+          <NavLink to={`/friend-profile/${id}`}>
             <img src={photo != null ? photo : avatar} alt="ava" />
-          </a>
+          </NavLink>
         </div>
         <div className="friends-user__buttons">
           {followed ? (

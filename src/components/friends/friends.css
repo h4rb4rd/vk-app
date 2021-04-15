@@ -81,12 +81,7 @@
   display: inline-block;
   margin: 0px 5px 10px 0px;
 }
-.preloader {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -40%);
-}
+
 /* .friends__btn {
   background-color: #007ee5;
   min-width: 170px;

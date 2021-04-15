@@ -1,8 +1,8 @@
 import React from 'react';
 import './friend-profile.css';
-
-import preloader from '../../assets/images/preloader.svg';
 import avatar from '../../assets/images/avatar.png';
+
+import Preloader from '../preloader';
 
 const FriendProfileInfo = ({ profile }) => {
   return (
@@ -88,7 +88,7 @@ const FriendProfile = ({ postData, profile }) => {
           </div>
         </div>
       ) : (
-        <img src={preloader} alt="preloader" className="preloader" />
+        <Preloader />
       )}
     </main>
   );

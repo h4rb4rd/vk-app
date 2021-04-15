@@ -4,10 +4,12 @@ import * as axios from 'axios';
 
 import FriendProfile from './friend-profile';
 import { setFriendProfileAC } from '../../redux/friend-profile-reducer';
+import { withRouter } from 'react-router';
 
 class FriendProfileContainer extends Component {
   componentDidMount() {
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`).then((res) => {
+    let userId = this.props.match.params.userId;
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then((res) => {
       this.props.setFriendProfile(res.data);
     });
   }
@@ -34,5 +36,5 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(FriendProfileContainer);
+let FriendProfileUrlComponent = withRouter(FriendProfileContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(FriendProfileUrlComponent);

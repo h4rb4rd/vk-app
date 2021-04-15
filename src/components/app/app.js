@@ -21,7 +21,7 @@ const App = (props) => {
         <Header />
         <Aside />
         <Route render={profilePage} path="/profile" />
-        <Route render={friendProfilePage} path="/friend-profile" />
+        <Route render={friendProfilePage} path="/friend-profile/:userId" />
         <Route render={friendsPage} path="/friends" />
         <Route render={messagesPage} path="/messages" />
       </div>

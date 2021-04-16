@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import './app.css';
 
-import Header from '../header';
+import HeaderContainer from '../header';
 import Aside from '../aside';
 import Profile from '../profile';
 import FriendProfileContainer from '../friend-profile';
@@ -18,7 +18,7 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <div className="app-wrapper">
-        <Header />
+        <HeaderContainer />
         <Aside />
         <Route render={profilePage} path="/profile" />
         <Route render={friendProfilePage} path="/friend-profile/:userId" />

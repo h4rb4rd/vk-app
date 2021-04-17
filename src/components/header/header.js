@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import './header.css';
 
 const Header = (props) => {
-  console.log(props);
   return (
     <header className="header">
       <div>
@@ -15,7 +14,7 @@ const Header = (props) => {
           />
         </a>
       </div>
-      <div className="login">{props.isAuth ? props.login : <NavLink to="login/">Login &#62;</NavLink>}</div>
+      <div className="login">{props.isAuth ? `Профиль: ${props.login}` : <NavLink to="login/">Профиль: Tony</NavLink>}</div>
     </header>
   );
 };

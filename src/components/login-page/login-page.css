@@ -1,0 +1,28 @@
+.login-page {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  padding: 30px;
+}
+.login-page__name {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0px 0px 30px 0px;
+}
+.login-page__button {
+  cursor: pointer;
+  width: 100px;
+  height: 35px;
+  border-radius: 10px;
+  border: none;
+  background-color: #2196f3;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease 0s;
+}

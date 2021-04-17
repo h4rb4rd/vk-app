@@ -4,6 +4,7 @@ import './friends.css';
 
 import avatar from '../../assets/images/avatar.png';
 import Preloader from '../preloader';
+import * as axios from 'axios';
 
 const Friend = ({ friend: { id, photo, name, status, followed }, follow, unfollow }) => {
   return (
@@ -22,7 +23,17 @@ const Friend = ({ friend: { id, photo, name, status, followed }, follow, unfollo
               className="friends-user__button"
               type="button"
               onClick={() => {
-                unfollow(id);
+                axios
+                  .delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
+                    withCredentials: true,
+                    headers: { 'API-KEY': 'f97b406a-88ca-4783-98f1-647fa4d66e82' },
+                  })
+                  .then((res) => {
+                    if (res.data.resultCode == 0) {
+                      unfollow(id);
+                    }
+                  });
+                // unfollow(id);
               }}
             >
               Unfollow
@@ -32,7 +43,18 @@ const Friend = ({ friend: { id, photo, name, status, followed }, follow, unfollo
               className="friends-user__button"
               type="button"
               onClick={() => {
-                follow(id);
+                axios
+                  .post(
+                    `https://social-network.samuraijs.com/api/1.0/follow/${id}`,
+                    {},
+                    { withCredentials: true, headers: { 'API-KEY': 'f97b406a-88ca-4783-98f1-647fa4d66e82' } },
+                  )
+                  .then((res) => {
+                    if (res.data.resultCode == 0) {
+                      follow(id);
+                    }
+                  });
+                // follow(id);
               }}
             >
               Follow

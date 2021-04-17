@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './app.css';
 
 import HeaderContainer from '../header';
@@ -8,8 +8,10 @@ import Profile from '../profile';
 import FriendProfileContainer from '../friend-profile';
 import Friends from '../friends';
 import MessagesContainer from '../messages';
+import LoginPageContainer from '../login-page';
 
 const App = (props) => {
+  const loginPage = () => <LoginPageContainer />;
   const profilePage = () => <Profile store={props.store} />;
   const friendProfilePage = () => <FriendProfileContainer />;
   const friendsPage = () => <Friends />;
@@ -17,6 +19,7 @@ const App = (props) => {
 
   return (
     <BrowserRouter>
+      <Route render={loginPage} exact path="/" />
       <div className="app-wrapper">
         <HeaderContainer />
         <Aside />

@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as axios from 'axios';
 
 import Friends from './friends';
 import { followAC, unfollowAC, setFriendsAC, setPageAC, setUsersCountAC, toggleIsFetchingAC } from '../../redux/friends-reducer';
+import { friendsApi } from '../../dal/api';
 
 class FriendsApiComponent extends Component {
   componentDidMount() {
-    this.props.toggleIsFetching(true);
-    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        this.props.toggleIsFetching(false);
-        this.props.setFriends(res.data.items);
-        this.props.setUsersCount(res.data.totalCount);
-      });
+    const { currentPage, pageSize, toggleIsFetching, setFriends, setUsersCount } = this.props;
+    toggleIsFetching(true);
+    friendsApi.getFriends(currentPage, pageSize).then((data) => {
+      toggleIsFetching(false);
+      setFriends(data.items);
+      setUsersCount(data.totalCount);
+    });
   }
   onPageChange = (page) => {
-    this.props.setPage(page);
-    this.props.toggleIsFetching(true);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then((res) => {
-      this.props.toggleIsFetching(false);
-      this.props.setFriends(res.data.items);
+    const { setPage, pageSize, toggleIsFetching, setFriends } = this.props;
+    setPage(page);
+    toggleIsFetching(true);
+    friendsApi.getFriends(page, pageSize).then((data) => {
+      toggleIsFetching(false);
+      setFriends(data.items);
     });
   };
   render() {

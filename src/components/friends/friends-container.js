@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Friends from './friends';
-import { followAC, unfollowAC, setFriendsAC, setPageAC, setUsersCountAC, toggleIsFetchingAC } from '../../redux/friends-reducer';
+import {
+  followAC,
+  unfollowAC,
+  setFriendsAC,
+  setPageAC,
+  setUsersCountAC,
+  toggleIsFetchingAC,
+  toggleInProgressAC,
+} from '../../redux/friends-reducer';
 import { friendsApi } from '../../dal/api';
 
 class FriendsApiComponent extends Component {
@@ -25,7 +33,7 @@ class FriendsApiComponent extends Component {
     });
   };
   render() {
-    const { friends, follow, unfollow, pageSize, totalCount, currentPage, isFetching } = this.props;
+    const { friends, follow, unfollow, pageSize, totalCount, currentPage, isFetching, inProgress, toggleInProgress } = this.props;
 
     return (
       <Friends
@@ -36,6 +44,8 @@ class FriendsApiComponent extends Component {
         pageSize={pageSize}
         totalCount={totalCount}
         isFetching={isFetching}
+        inProgress={inProgress}
+        toggleInProgress={toggleInProgress}
         onPageChange={this.onPageChange}
       />
     );
@@ -49,6 +59,7 @@ const mapStateToProps = (state) => {
     totalCount: state.friends.totalCount,
     currentPage: state.friends.currentPage,
     isFetching: state.friends.isFetching,
+    inProgress: state.friends.inProgress,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -70,6 +81,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     toggleIsFetching: (isFetching) => {
       dispatch(toggleIsFetchingAC(isFetching));
+    },
+    toggleInProgress: (inProgress, userId) => {
+      dispatch(toggleInProgressAC(inProgress, userId));
     },
   };
 };

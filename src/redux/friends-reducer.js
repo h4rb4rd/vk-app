@@ -5,6 +5,7 @@ const Actions = {
   SET_PAGE: 'SET_PAGE',
   FRIENDS_COUNT: 'FRIENDS_COUNT',
   TOGGLE_IS_FETCHING: 'TOGGLE_IS_FETCHING',
+  TOGGLE_IN_PROGRESS: 'TOGGLE_IN_PROGRESS',
 };
 
 const initialState = {
@@ -76,6 +77,7 @@ const initialState = {
   pageSize: 4,
   currentPage: 1,
   isFetching: false,
+  inProgress: [],
 };
 
 const friendsReducer = (state = initialState, action) => {
@@ -121,6 +123,13 @@ const friendsReducer = (state = initialState, action) => {
         ...state,
         isFetching: action.isFetching,
       };
+    case Actions.TOGGLE_IN_PROGRESS:
+      return {
+        ...state,
+        inProgress: action.inProgress
+          ? [...state.inProgress, action.userId]
+          : state.inProgress.filter((id) => id != action.userId),
+      };
     default:
       return state;
   }
@@ -160,6 +169,13 @@ export const toggleIsFetchingAC = (isFetching) => {
   return {
     type: Actions.TOGGLE_IS_FETCHING,
     isFetching,
+  };
+};
+export const toggleInProgressAC = (inProgress, userId) => {
+  return {
+    type: Actions.TOGGLE_IN_PROGRESS,
+    inProgress,
+    userId,
   };
 };
 export default friendsReducer;

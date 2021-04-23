@@ -2,50 +2,31 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Friends from './friends';
-import {
-  followAC,
-  unfollowAC,
-  setFriendsAC,
-  setPageAC,
-  setUsersCountAC,
-  toggleIsFetchingAC,
-  toggleInProgressAC,
-} from '../../redux/friends-reducer';
-import { friendsApi } from '../../dal/api';
+import { followTC, unfollowTC, setPageAC, toggleInProgressAC, getFriendsTC } from '../../redux/friends-reducer';
 
 class FriendsApiComponent extends Component {
   componentDidMount() {
-    const { currentPage, pageSize, toggleIsFetching, setFriends, setUsersCount } = this.props;
-    toggleIsFetching(true);
-    friendsApi.getFriends(currentPage, pageSize).then((data) => {
-      toggleIsFetching(false);
-      setFriends(data.items);
-      setUsersCount(data.totalCount);
-    });
+    const { currentPage, pageSize, getFriendsTh } = this.props;
+    getFriendsTh(currentPage, pageSize);
   }
   onPageChange = (page) => {
-    const { setPage, pageSize, toggleIsFetching, setFriends } = this.props;
+    const { setPage, pageSize, getFriendsTh } = this.props;
     setPage(page);
-    toggleIsFetching(true);
-    friendsApi.getFriends(page, pageSize).then((data) => {
-      toggleIsFetching(false);
-      setFriends(data.items);
-    });
+    getFriendsTh(page, pageSize);
   };
   render() {
-    const { friends, follow, unfollow, pageSize, totalCount, currentPage, isFetching, inProgress, toggleInProgress } = this.props;
-
+    const { friends, followTh, unfollowTh, pageSize, totalCount, currentPage, isFetching, inProgress } = this.props;
+    // console.log(this.props);
     return (
       <Friends
         friends={friends}
-        follow={follow}
-        unfollow={unfollow}
+        followTh={followTh}
+        unfollowTh={unfollowTh}
         currentPage={currentPage}
         pageSize={pageSize}
         totalCount={totalCount}
         isFetching={isFetching}
         inProgress={inProgress}
-        toggleInProgress={toggleInProgress}
         onPageChange={this.onPageChange}
       />
     );
@@ -64,26 +45,20 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    follow: (id) => {
-      dispatch(followAC(id));
+    followTh: (friendId) => {
+      dispatch(followTC(friendId));
     },
-    unfollow: (id) => {
-      dispatch(unfollowAC(id));
-    },
-    setFriends: (friends) => {
-      dispatch(setFriendsAC(friends));
+    unfollowTh: (friendId) => {
+      dispatch(unfollowTC(friendId));
     },
     setPage: (page) => {
       dispatch(setPageAC(page));
     },
-    setUsersCount: (count) => {
-      dispatch(setUsersCountAC(count));
-    },
-    toggleIsFetching: (isFetching) => {
-      dispatch(toggleIsFetchingAC(isFetching));
-    },
     toggleInProgress: (inProgress, userId) => {
       dispatch(toggleInProgressAC(inProgress, userId));
+    },
+    getFriendsTh: (currentPage, pageSize) => {
+      dispatch(getFriendsTC(currentPage, pageSize));
     },
   };
 };

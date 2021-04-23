@@ -1,3 +1,5 @@
+import { friendsApi } from '../dal/api';
+
 const Actions = {
   SET_USER_PROFILE: 'SET_USER_PROFILE',
 };
@@ -22,6 +24,13 @@ export const setFriendProfileAC = (profile) => {
   return {
     type: Actions.SET_USER_PROFILE,
     profile,
+  };
+};
+export const getFriendProfileTC = (userId) => {
+  return (dispatch) => {
+    friendsApi.getFriendProfile(userId).then((res) => {
+      dispatch(setFriendProfileAC(res.data));
+    });
   };
 };
 

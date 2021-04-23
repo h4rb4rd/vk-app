@@ -3,7 +3,8 @@ import axios from 'axios';
 const instance = axios.create({
   baseURL: 'https://social-network.samuraijs.com/api/1.0/',
   withCredentials: true,
-  headers: { 'API-KEY': 'f97b406a-88ca-4783-98f1-647fa4d66e82' },
+  // headers: { 'API-KEY': 'f97b406a-88ca-4783-98f1-647fa4d66e82' },
+  headers: { 'API-KEY': '4ae63362-c114-4db4-a656-1c0e5ba93f20' },
 });
 
 export const friendsApi = {
@@ -19,5 +20,13 @@ export const friendsApi = {
   },
   follow(id) {
     return instance.post(`follow/${id}`).then((res) => res.data);
+  },
+  getFriendProfile(userId) {
+    return instance.get(`profile/${userId}`);
+  },
+};
+export const authApi = {
+  getMe() {
+    return instance.get(`auth/me/`);
   },
 };

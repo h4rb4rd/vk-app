@@ -4,9 +4,9 @@ import './friends.css';
 
 import avatar from '../../assets/images/avatar.png';
 import Preloader from '../preloader';
-import { friendsApi } from '../../dal/api';
 
-const Friend = ({ friend, follow, unfollow, inProgress, toggleInProgress }) => {
+const Friend = ({ friend, followTh, unfollowTh, inProgress }) => {
+  console.log(followTh);
   return (
     <div className="friends__container">
       {/* user */}
@@ -24,14 +24,7 @@ const Friend = ({ friend, follow, unfollow, inProgress, toggleInProgress }) => {
               className="friends-user__button"
               type="button"
               onClick={() => {
-                toggleInProgress(true, friend.id);
-                friendsApi.unfollow(friend.id).then((data) => {
-                  if (data.resultCode == 0) {
-                    unfollow(friend.id);
-                  }
-                  toggleInProgress(false, friend.id);
-                });
-                // unfollow(id);
+                unfollowTh(friend.id);
               }}
             >
               Unfollow
@@ -42,13 +35,7 @@ const Friend = ({ friend, follow, unfollow, inProgress, toggleInProgress }) => {
               className="friends-user__button"
               type="button"
               onClick={() => {
-                toggleInProgress(true, friend.id);
-                friendsApi.follow(friend.id).then((data) => {
-                  if (data.resultCode == 0) {
-                    follow(friend.id);
-                  }
-                  toggleInProgress(false, friend.id);
-                });
+                followTh(friend.id);
                 // follow(id);
               }}
             >
@@ -69,18 +56,7 @@ const Friend = ({ friend, follow, unfollow, inProgress, toggleInProgress }) => {
   );
 };
 
-const Friends = ({
-  friends,
-  follow,
-  unfollow,
-  currentPage,
-  onPageChange,
-  totalCount,
-  pageSize,
-  isFetching,
-  inProgress,
-  toggleInProgress,
-}) => {
+const Friends = ({ friends, followTh, unfollowTh, currentPage, onPageChange, totalCount, pageSize, isFetching, inProgress }) => {
   const pagesCount = Math.ceil(totalCount / pageSize);
   const pages = [];
   for (let i = 1; i <= pagesCount; i++) {
@@ -93,16 +69,7 @@ const Friends = ({
 
       {!isFetching
         ? friends.map((friend) => {
-            return (
-              <Friend
-                friend={friend}
-                key={friend.id}
-                follow={follow}
-                unfollow={unfollow}
-                inProgress={inProgress}
-                toggleInProgress={toggleInProgress}
-              />
-            );
+            return <Friend friend={friend} key={friend.id} followTh={followTh} unfollowTh={unfollowTh} inProgress={inProgress} />;
           })
         : null}
 

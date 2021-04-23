@@ -1,3 +1,5 @@
+import { friendsApi } from '../dal/api';
+
 const Actions = {
   FOLLOW: 'FOLLOW',
   UNFOLLOW: 'UNFOLLOW',
@@ -178,4 +180,38 @@ export const toggleInProgressAC = (inProgress, userId) => {
     userId,
   };
 };
+
+export const getFriendsTC = (currentPage, pageSize) => {
+  return (dispatch) => {
+    dispatch(toggleIsFetchingAC(true));
+    friendsApi.getFriends(currentPage, pageSize).then((data) => {
+      dispatch(toggleIsFetchingAC(false));
+      dispatch(setFriendsAC(data.items));
+      dispatch(setUsersCountAC(data.totalCount));
+    });
+  };
+};
+export const followTC = (friendId) => {
+  return (dispatch) => {
+    dispatch(toggleInProgressAC(true, friendId));
+    friendsApi.follow(friendId).then((data) => {
+      if (data.resultCode == 0) {
+        dispatch(followAC(friendId));
+      }
+      dispatch(toggleInProgressAC(false, friendId));
+    });
+  };
+};
+export const unfollowTC = (friendId) => {
+  return (dispatch) => {
+    dispatch(toggleInProgressAC(true, friendId));
+    friendsApi.unfollow(friendId).then((data) => {
+      if (data.resultCode == 0) {
+        dispatch(unfollowAC(friendId));
+      }
+      dispatch(toggleInProgressAC(false, friendId));
+    });
+  };
+};
+
 export default friendsReducer;

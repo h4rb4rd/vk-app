@@ -1,3 +1,5 @@
+import { authApi } from '../dal/api';
+
 const Actions = {
   SET_USER_DATA: 'SET_USER_DATA',
 };
@@ -27,5 +29,14 @@ export const setUserDataAC = (id, email, login) => {
     },
   };
 };
-
+export const getAuthUserDataTC = () => {
+  return (dispatch) => {
+    authApi.getMe().then((res) => {
+      const { id, email, login } = res.data.data;
+      if (res.data.resultCode === 0) {
+        dispatch(setUserDataAC(id, email, login));
+      }
+    });
+  };
+};
 export default authReducer;

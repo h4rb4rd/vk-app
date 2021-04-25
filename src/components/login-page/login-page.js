@@ -6,9 +6,10 @@ const LoginPage = ({ onLogin, isLogged }) => {
   if (isLogged) {
     return <Redirect to="/profile" />;
   }
+
   return (
     <div className="login-page">
-      <p className="login-page__name">Войти!</p>
+      <p className="login-page__name">Enter!</p>
       <button
         className="login-page__button"
         onClick={() => {

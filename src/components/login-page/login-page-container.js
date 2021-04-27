@@ -4,12 +4,11 @@ import { connect } from 'react-redux';
 import LoginPage from './login-page';
 import { onLoginAC } from '../../redux/login-page-reducer';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 const LoginPageContainer = ({ onLogin, isLogged }) => {
   return <LoginPage onLogin={onLogin} isLogged={isLogged} />;
 };
-
-const AuthRedirectComponent = withAuthRedirect(LoginPageContainer);
 
 const mapStateToProps = (state) => {
   return {
@@ -23,4 +22,4 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
+export default compose(connect(mapStateToProps, mapDispatchToProps), withAuthRedirect)(LoginPageContainer);

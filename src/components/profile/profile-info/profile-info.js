@@ -1,18 +1,19 @@
 import React from 'react';
 import './profile-info.css';
 
+import ProfileStatus from './profile-status';
+
 const ProfileInfo = () => {
   return (
     <div className="profile__user profile-user">
       {/* avatar */}
       <div className="profile-user__avatar">
         <a href="#">
-          <img
-            src="https://www.drupal.org/files/user-pictures/picture-2204516-1469808304.png"
-            alt="avatar"
-          />
+          <img src="https://www.drupal.org/files/user-pictures/picture-2204516-1469808304.png" alt="avatar" />
         </a>
       </div>
+      {/* status */}
+      <ProfileStatus statusText="Set status" />
       {/* info */}
       <div className="profile__info profile-info">
         <ul className="profile-info__list">

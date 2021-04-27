@@ -7,29 +7,21 @@ const MyPosts = ({ postData, postTextData, addPost, updatePostText }) => {
     <div>
       {/* form */}
       <form className="profile__form profile-form">
-        <label className="profile-form__label" htmlFor="profile-form">
-          My Posts
-        </label>
+        <label className="profile-form__label">My Posts</label>
         <textarea
           placeholder="Enter Your Message"
           className="profile-form__textarea"
           value={postTextData}
           onChange={updatePostText}
         />
-        <button
-          type="button"
-          className="profile-form__button"
-          onClick={addPost}
-        >
+        <button type="button" className="profile-form__button" onClick={addPost}>
           Add post
         </button>
       </form>
       {/* posts */}
       <div className="profile__posts">
         {postData.map((data) => {
-          return (
-            <Post postText={data.postText} likes={data.like} key={data.id} />
-          );
+          return <Post postText={data.postText} likes={data.like} key={data.id} />;
         })}
       </div>
     </div>

@@ -4,7 +4,7 @@ import './app.css';
 
 import HeaderContainer from '../header';
 import Aside from '../aside';
-import Profile from '../profile';
+import ProfileContainer from '../profile';
 import FriendProfileContainer from '../friend-profile';
 import Friends from '../friends';
 import MessagesContainer from '../messages';
@@ -12,7 +12,7 @@ import LoginPageContainer from '../login-page';
 
 const App = (props) => {
   const loginPage = () => <LoginPageContainer />;
-  const profilePage = () => <Profile store={props.store} />;
+  const profilePage = () => <ProfileContainer />;
   const friendProfilePage = () => <FriendProfileContainer />;
   const friendsPage = () => <Friends />;
   const messagesPage = () => <MessagesContainer store={props.store} />;

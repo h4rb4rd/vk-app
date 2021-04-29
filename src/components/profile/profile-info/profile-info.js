@@ -3,7 +3,7 @@ import './profile-info.css';
 
 import ProfileStatus from './profile-status';
 
-const ProfileInfo = () => {
+const ProfileInfo = ({ status, updateStatusTh }) => {
   return (
     <div className="profile__user profile-user">
       {/* avatar */}
@@ -13,7 +13,7 @@ const ProfileInfo = () => {
         </a>
       </div>
       {/* status */}
-      <ProfileStatus statusText="Set status" />
+      <ProfileStatus status={status} updateStatusTh={updateStatusTh} />
       {/* info */}
       <div className="profile__info profile-info">
         <ul className="profile-info__list">

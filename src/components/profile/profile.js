@@ -2,24 +2,21 @@ import React from 'react';
 import './profile.css';
 
 import ProfileInfo from './profile-info';
-import MyPostsContainer from './my-posts';
+import MyPosts from './my-posts';
 
-const Profile = (props) => {
+const Profile = ({ postData, postTextData, addPost, updatePostText, status, updateStatusTh }) => {
   return (
     <main className="profile">
       {/* image */}
       <div className="profile__image">
-        <img
-          src="https://linkedinbackground.com/download/Night-City.jpg"
-          alt="img"
-        />
+        <img src="https://linkedinbackground.com/download/Night-City.jpg" alt="img" />
       </div>
       {/* content */}
       <div className="profile__content">
         {/* user (ava+description)*/}
-        <ProfileInfo />
+        <ProfileInfo status={status} updateStatusTh={updateStatusTh} />
         {/* posts */}
-        <MyPostsContainer store={props.store} />
+        <MyPosts postData={postData} postTextData={postTextData} addPost={addPost} updatePostText={updatePostText} />
       </div>
     </main>
   );

@@ -1,6 +1,9 @@
+import { profileApi } from '../dal/api';
+
 const Actions = {
   UPDATE_POST_TEXT: 'UPDATE-POST-TEXT',
   ADD_POST: 'ADD-POST',
+  SET_STATUS: 'SET_STATUS',
 };
 
 const initialState = {
@@ -9,6 +12,7 @@ const initialState = {
     { id: 2, postText: 'Hi, how are you?', like: 3 },
   ],
   postTextData: '',
+  status: '',
 };
 
 let idMax = 100;
@@ -29,7 +33,8 @@ const profileReducer = (state = initialState, action) => {
         postData: [...state.postData, newObj],
         postTextData: '',
       };
-
+    case Actions.SET_STATUS:
+      return { ...state, status: action.status };
     default:
       return state;
   }
@@ -47,5 +52,27 @@ export const addPostAC = () => {
     type: Actions.ADD_POST,
   };
 };
+export const setStatusAC = (status) => {
+  return {
+    type: Actions.SET_STATUS,
+    status,
+  };
+};
 
+export const getStatusTC = (userId) => {
+  return (dispatch) => {
+    profileApi.getStatus(userId).then((res) => {
+      dispatch(setStatusAC(res.data));
+    });
+  };
+};
+export const updateStatusTC = (status) => {
+  return (dispatch) => {
+    profileApi.updateStatus(status).then((res) => {
+      if (res.data.resultCode === 0) {
+        dispatch(setStatusAC(status));
+      }
+    });
+  };
+};
 export default profileReducer;

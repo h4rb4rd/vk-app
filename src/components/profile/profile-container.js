@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import MyPosts from './my-posts';
-import { addPostAC, updatePostTextAC } from '../../../redux/profile-reducer';
+import Profile from './profile';
+import { addPostAC, updatePostTextAC, getStatusTC, updateStatusTC } from '../../redux/profile-reducer';
 
 const mapStateToProps = (state) => {
   return {
     postData: state.profile.postData,
     postTextData: state.profile.postTextData,
+    status: state.profile.status,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -19,8 +20,14 @@ const mapDispatchToProps = (dispatch) => {
     addPost: () => {
       dispatch(addPostAC());
     },
+    getStatusTh: (userId) => {
+      dispatch(getStatusTC(userId));
+    },
+    updateStatusTh: (status) => {
+      dispatch(updateStatusTC(status));
+    },
   };
 };
 
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
 export default MyPostsContainer;

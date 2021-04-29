@@ -4,7 +4,8 @@ import avatar from '../../assets/images/avatar.png';
 
 import Preloader from '../preloader';
 
-const FriendProfileInfo = ({ profile }) => {
+const FriendProfileInfo = ({ profile, status }) => {
+  console.log(status);
   return (
     <div className="friend-profile__user friend-user">
       {/* avatar */}
@@ -12,6 +13,9 @@ const FriendProfileInfo = ({ profile }) => {
         <a href="#">
           <img src={profile.photos.large != null ? profile.photos.large : avatar} alt="ava" />
         </a>
+      </div>
+      <div className="friend-profile__status friend-status">
+        <span className="friend-status__text">{status}</span>
       </div>
       {/* info */}
       <div className="friend-user__info friend-info">
@@ -63,7 +67,7 @@ const FriendPost = ({ postText, likes }) => {
   );
 };
 
-const FriendProfile = ({ postData, profile }) => {
+const FriendProfile = ({ postData, profile, status }) => {
   return (
     <main className="friend-profile">
       {/* image */}
@@ -75,7 +79,7 @@ const FriendProfile = ({ postData, profile }) => {
         <div className="friend-profile__content">
           {/* user (ava+description)*/}
 
-          <FriendProfileInfo profile={profile} />
+          <FriendProfileInfo profile={profile} status={status} />
           {/* posts */}
           <div>
             <h2 className="friend-profile__title">Recent Posts</h2>

@@ -21,12 +21,23 @@ export const friendsApi = {
   follow(id) {
     return instance.post(`follow/${id}`).then((res) => res.data);
   },
-  getFriendProfile(userId) {
-    return instance.get(`profile/${userId}`);
-  },
 };
 export const authApi = {
   getMe() {
     return instance.get(`auth/me/`);
+  },
+};
+
+export const profileApi = {
+  getFriendProfile(userId) {
+    return instance.get(`profile/${userId}`);
+  },
+  getStatus(userId) {
+    return instance.get(`profile/status/${userId}`);
+  },
+  updateStatus(status) {
+    return instance.put(`profile/status`, {
+      status: status,
+    });
   },
 };

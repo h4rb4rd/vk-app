@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import './profile-status.css';
 
 export default class ProfileStatus extends Component {
+  componentDidMount() {}
   state = {
     editMode: false,
+    status: this.props.status,
   };
   editModeOn = () => {
     this.setState({
@@ -15,19 +17,32 @@ export default class ProfileStatus extends Component {
     this.setState({
       editMode: false,
     });
+    this.props.updateStatusTh(this.state.status);
+  };
+  onStatusChange = (e) => {
+    this.setState({
+      status: e.currentTarget.value,
+    });
   };
   render() {
-    const { statusText } = this.props;
+    const { status } = this.props;
     const { editMode } = this.state;
     return (
       <div className="profile__status profile-status">
         {!editMode && (
           <span onClick={this.editModeOn} className="profile-status__text">
-            {statusText}
+            {status || 'set status'}
           </span>
         )}
         {editMode && (
-          <input autoFocus={true} onBlur={this.editModeOff} value={statusText} type="text" className="profile-status__input" />
+          <input
+            onChange={this.onStatusChange}
+            autoFocus={true}
+            onBlur={this.editModeOff}
+            value={this.state.status}
+            type="text"
+            className="profile-status__input"
+          />
         )}
       </div>
     );

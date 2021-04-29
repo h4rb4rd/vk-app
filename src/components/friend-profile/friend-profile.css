@@ -109,3 +109,13 @@
   left: 50%;
   transform: translate(-50%, -40%);
 }
+
+.friend-profile__status {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 0px 20px 0px;
+}
+
+.friend-status__text {
+  font-size: 14px;
+}

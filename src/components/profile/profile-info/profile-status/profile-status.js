@@ -8,6 +8,11 @@ export default class ProfileStatus extends Component {
     editMode: false,
     status: this.props.status,
   };
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.status !== this.props.status) {
+      this.setState({ status: this.props.status });
+    }
+  }
   editModeOn = () => {
     this.setState({
       editMode: true,

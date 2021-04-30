@@ -3,6 +3,17 @@ import { connect } from 'react-redux';
 
 import Profile from './profile';
 import { addPostAC, updatePostTextAC, getStatusTC, updateStatusTC } from '../../redux/profile-reducer';
+import { Component } from 'react';
+
+class ProfileContainer extends Component {
+  componentDidMount() {
+    let userId = 16618;
+    this.props.getStatusTh(userId);
+  }
+  render() {
+    return <Profile {...this.props} />;
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -29,5 +40,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
-export default MyPostsContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);

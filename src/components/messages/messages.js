@@ -3,15 +3,30 @@ import './messages.css';
 
 import NavItem from './nav-item';
 import MessageItem from './message-item';
+import { Form, Field } from 'react-final-form';
 
-const Messages = ({
-  friendData,
-  messageData,
-  userMessageData,
-  messageTextData,
-  addMessage,
-  updateMessageText,
-}) => {
+const MessagesForm = ({ addMessage }) => {
+  return (
+    <Form
+      onSubmit={(formData) => {
+        addMessage(formData.myMessage);
+      }}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit} className="dialogs__form dialogs-form">
+          <Field
+            type="textarea"
+            name="myMessage"
+            component={'input'}
+            placeholder="Enter Your Message"
+            className="dialogs-form__textarea"
+          />
+          <button className="dialogs-form__button">Send</button>
+        </form>
+      )}
+    ></Form>
+  );
+};
+const Messages = ({ friendData, messageData, userMessageData, addMessage }) => {
   return (
     <main className="messages">
       {/* nav */}
@@ -40,21 +55,7 @@ const Messages = ({
           })}
         </div>
         {/* form */}
-        <form className="dialogs__form dialogs-form">
-          <textarea
-            placeholder="Enter Your Message"
-            className="dialogs-form__textarea"
-            value={messageTextData}
-            onChange={updateMessageText}
-          />
-          <button
-            type="button"
-            className="dialogs-form__button"
-            onClick={addMessage}
-          >
-            Send
-          </button>
-        </form>
+        <MessagesForm addMessage={addMessage} />
       </div>
     </main>
   );

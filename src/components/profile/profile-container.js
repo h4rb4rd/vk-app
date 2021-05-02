@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Profile from './profile';
-import { addPostAC, updatePostTextAC, getStatusTC, updateStatusTC } from '../../redux/profile-reducer';
+import { addPostAC, getStatusTC, updateStatusTC } from '../../redux/profile-reducer';
 import { Component } from 'react';
 
 class ProfileContainer extends Component {
@@ -18,18 +18,13 @@ class ProfileContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     postData: state.profile.postData,
-    postTextData: state.profile.postTextData,
     status: state.profile.status,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    updatePostText: (e) => {
-      let text = e.target.value;
-      dispatch(updatePostTextAC(text));
-    },
-    addPost: () => {
-      dispatch(addPostAC());
+    addPost: (postText) => {
+      dispatch(addPostAC(postText));
     },
     getStatusTh: (userId) => {
       dispatch(getStatusTC(userId));

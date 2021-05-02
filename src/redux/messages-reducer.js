@@ -1,5 +1,4 @@
 const Actions = {
-  UPDATE_MESSAGE_TEXT: 'UPDATE-MESSAGE-TEXT',
   ADD_MESSAGE: 'ADD-MESSAGE',
   id: 100,
 };
@@ -27,39 +26,30 @@ const initialState = {
     },
   ],
   userMessageData: [],
-  messageTextData: '',
 };
 
 let idMax = 100;
 
 const messagesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case Actions.UPDATE_MESSAGE_TEXT:
-      return { ...state, messageTextData: action.text };
     case Actions.ADD_MESSAGE:
       const newObj = {
         id: idMax++,
-        messageText: state.messageTextData,
+        messageText: action.messageText,
       };
       return {
         ...state,
         userMessageData: [...state.userMessageData, newObj],
-        messageTextData: '',
       };
     default:
       return state;
   }
 };
 
-export const updateMessageTextAC = (text) => {
-  return {
-    type: Actions.UPDATE_MESSAGE_TEXT,
-    text,
-  };
-};
-export const addMessageAC = () => {
+export const addMessageAC = (messageText) => {
   return {
     type: Actions.ADD_MESSAGE,
+    messageText,
   };
 };
 

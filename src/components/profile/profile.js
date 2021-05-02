@@ -4,7 +4,7 @@ import './profile.css';
 import ProfileInfo from './profile-info';
 import MyPosts from './my-posts';
 
-const Profile = ({ postData, postTextData, addPost, updatePostText, status, updateStatusTh }) => {
+const Profile = ({ postData, addPost, status, updateStatusTh }) => {
   return (
     <main className="profile">
       {/* image */}
@@ -16,7 +16,7 @@ const Profile = ({ postData, postTextData, addPost, updatePostText, status, upda
         {/* user (ava+description)*/}
         <ProfileInfo status={status} updateStatusTh={updateStatusTh} />
         {/* posts */}
-        <MyPosts postData={postData} postTextData={postTextData} addPost={addPost} updatePostText={updatePostText} />
+        <MyPosts postData={postData} addPost={addPost} />
       </div>
     </main>
   );

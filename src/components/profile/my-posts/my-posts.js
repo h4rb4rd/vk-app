@@ -1,23 +1,31 @@
 import React from 'react';
+import { Form, Field } from 'react-final-form';
 import './my-posts.css';
 import Post from './post';
 
-const MyPosts = ({ postData, postTextData, addPost, updatePostText }) => {
+const MyPostsForm = ({ addPost }) => {
+  return (
+    <Form
+      onSubmit={(formData) => {
+        addPost(formData.profilePost);
+      }}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit} className="profile__form profile-form">
+          <label className="profile-form__label">My Posts</label>
+          <Field component="textarea" name="profilePost" placeholder="Enter Your Message" className="profile-form__textarea" />
+          <button className="profile-form__button">Add post</button>
+        </form>
+      )}
+    ></Form>
+  );
+};
+
+const MyPosts = ({ postData, addPost }) => {
   return (
     <div>
       {/* form */}
-      <form className="profile__form profile-form">
-        <label className="profile-form__label">My Posts</label>
-        <textarea
-          placeholder="Enter Your Message"
-          className="profile-form__textarea"
-          value={postTextData}
-          onChange={updatePostText}
-        />
-        <button type="button" className="profile-form__button" onClick={addPost}>
-          Add post
-        </button>
-      </form>
+      <MyPostsForm addPost={addPost} />
+
       {/* posts */}
       <div className="profile__posts">
         {postData.map((data) => {

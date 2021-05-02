@@ -10,18 +10,17 @@ const LoginForm = ({ onLogin, isLogged }) => {
       onSubmit={(formData) => {
         console.log(formData);
       }}
-    >
-      {({ handleSubmit }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit} className="login-page__form login-form">
           <div className="login-form__input">
-            <Field type="text" placeholder="Login" className="input" name="login" component={'input'} />
+            <Field type="text" placeholder="Login" className="input" name="login" component="input" />
           </div>
           <div className="login-form__input">
-            <Field type="text" placeholder="Password" className="input" name="password" component={'input'} />
+            <Field type="text" placeholder="Password" className="input" name="password" component="input" />
           </div>
           <div className="login-form__checkbox">
             <label htmlFor="login-checkbox">Remember me</label>
-            <Field id="login-checkbox" type="checkbox" name="rememberMe" component={'input'} />
+            <Field id="login-checkbox" type="checkbox" name="rememberMe" component="input" />
           </div>
           {/* <p className="login-page__name">Enter!</p> */}
           <button
@@ -34,14 +33,14 @@ const LoginForm = ({ onLogin, isLogged }) => {
           </button>
         </form>
       )}
-    </Form>
+    ></Form>
   );
 };
 
 const LoginPage = ({ onLogin, isLogged }) => {
-  // if (isLogged) {
-  //   return <Redirect to="/profile" />;
-  // }
+  if (isLogged) {
+    return <Redirect to="/profile" />;
+  }
 
   return (
     <div className="login-page">

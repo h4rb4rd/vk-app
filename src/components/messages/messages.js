@@ -4,6 +4,7 @@ import './messages.css';
 import NavItem from './nav-item';
 import MessageItem from './message-item';
 import { Form, Field } from 'react-final-form';
+import { required, maxLength, composeValidators } from '../../utils/validators';
 
 const MessagesForm = ({ addMessage }) => {
   return (
@@ -13,13 +14,14 @@ const MessagesForm = ({ addMessage }) => {
       }}
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit} className="dialogs__form dialogs-form">
-          <Field
-            type="textarea"
-            name="myMessage"
-            component={'input'}
-            placeholder="Enter Your Message"
-            className="dialogs-form__textarea"
-          />
+          <Field name="myMessage" validate={composeValidators(required, maxLength(35))}>
+            {({ input, meta }) => (
+              <div className="dialogs-form__container">
+                <input {...input} type="textarea" placeholder="Enter Your Message" className="dialogs-form__textarea" />
+                {meta.error && meta.touched && <span className="error">{meta.error}</span>}
+              </div>
+            )}
+          </Field>
           <button className="dialogs-form__button">Send</button>
         </form>
       )}

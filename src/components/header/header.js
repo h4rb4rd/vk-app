@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import './header.css';
 
 const Header = (props) => {
@@ -14,7 +15,19 @@ const Header = (props) => {
           />
         </a>
       </div>
-      <div className="login">{props.isAuth ? `Профиль: ${props.login}` : <NavLink to="login/">Профиль: Tony</NavLink>}</div>
+      <div className="login">
+        {props.isAuth ? (
+          <div>
+            {props.login}
+            <button onClick={props.logoutTh} className="logout">
+              Logout &#10006;
+            </button>
+          </div>
+        ) : (
+          // <NavLink to="/">Login</NavLink>
+          <Redirect to="/" />
+        )}
+      </div>
     </header>
   );
 };

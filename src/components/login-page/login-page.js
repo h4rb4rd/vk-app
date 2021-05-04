@@ -5,19 +5,20 @@ import './login-page.css';
 import { Form, Field } from 'react-final-form';
 import { required, maxLength, composeValidators, minLength } from '../../utils/validators';
 
-const LoginForm = ({ onLogin, isLogged }) => {
+const LoginForm = ({ onLogin, isLogged, loginTh }) => {
   return (
     <Form
-      onSubmit={(formData) => {
-        console.log(formData);
+      onSubmit={({ email, password, rememberMe }) => {
+        console.log(email);
+        loginTh(email, password, rememberMe);
       }}
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit} className="login-page__form login-form">
           <div className="login-form__input">
-            <Field name="login" validate={composeValidators(required, maxLength(15), minLength(4))}>
+            <Field name="email" validate={composeValidators(required, maxLength(20), minLength(4))}>
               {({ input, meta }) => (
                 <div className="login-input__container">
-                  <input {...input} type="text" placeholder="Login" className={`input ${meta.error && meta.touched && 'red'}`} />
+                  <input {...input} type="email" placeholder="email" className={`input ${meta.error && meta.touched && 'red'}`} />
                   {meta.error && meta.touched && <span className="error">{meta.error}</span>}
                 </div>
               )}
@@ -29,7 +30,7 @@ const LoginForm = ({ onLogin, isLogged }) => {
                 <div className="login-input__container">
                   <input
                     {...input}
-                    type="text"
+                    type="password"
                     placeholder="Password"
                     className={`input ${meta.error && meta.touched && 'red'}`}
                   />
@@ -39,7 +40,7 @@ const LoginForm = ({ onLogin, isLogged }) => {
             </Field>
           </div>
           <div className="login-form__checkbox">
-            <Field name="rememberMe" validate={required}>
+            <Field name="rememberMe" type="checkbox" validate={required}>
               {({ input, meta }) => (
                 <div className="login-input__container">
                   <label htmlFor="login-checkbox">Remember me</label>
@@ -52,9 +53,9 @@ const LoginForm = ({ onLogin, isLogged }) => {
           {/* <p className="login-page__name">Enter!</p> */}
           <button
             className="login-page__button"
-            onClick={() => {
-              onLogin(isLogged);
-            }}
+            // onClick={() => {
+            //   onLogin(isLogged);
+            // }}
           >
             Enter
           </button>
@@ -64,7 +65,7 @@ const LoginForm = ({ onLogin, isLogged }) => {
   );
 };
 
-const LoginPage = ({ onLogin, isLogged }) => {
+const LoginPage = ({ onLogin, isLogged, loginTh }) => {
   // if (isLogged) {
   //   return <Redirect to="/profile" />;
   // }
@@ -72,7 +73,7 @@ const LoginPage = ({ onLogin, isLogged }) => {
   return (
     <div className="login-page">
       {/* form */}
-      <LoginForm onLogin={onLogin} isLogged={isLogged} />
+      <LoginForm onLogin={onLogin} isLogged={isLogged} loginTh={loginTh} />
     </div>
   );
 };

@@ -5,9 +5,10 @@ import LoginPage from './login-page';
 import { onLoginAC } from '../../redux/login-page-reducer';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
+import { loginTC } from '../../redux/auth-reducer';
 
-const LoginPageContainer = ({ onLogin, isLogged }) => {
-  return <LoginPage onLogin={onLogin} isLogged={isLogged} />;
+const LoginPageContainer = ({ onLogin, isLogged, loginTh }) => {
+  return <LoginPage onLogin={onLogin} isLogged={isLogged} loginTh={loginTh} />;
 };
 
 const mapStateToProps = (state) => {
@@ -19,6 +20,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onLogin: (isLogged) => {
       dispatch(onLoginAC(isLogged));
+    },
+    loginTh: (email, password, rememberMe) => {
+      dispatch(loginTC(email, password, rememberMe));
     },
   };
 };

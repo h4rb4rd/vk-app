@@ -5,20 +5,22 @@ import './login-page.css';
 import { Form, Field } from 'react-final-form';
 import { required, maxLength, composeValidators, minLength } from '../../utils/validators';
 
-const LoginForm = ({ onLogin, isLogged, loginTh }) => {
+import { FORM_ERROR } from 'final-form';
+
+const LoginForm = ({ onLogin, isLogged, loginTh, error }) => {
   return (
     <Form
       onSubmit={({ email, password, rememberMe }) => {
-        console.log(email);
         loginTh(email, password, rememberMe);
       }}
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit} className="login-page__form login-form">
+          {error && <div className="error error-main">{error}</div>}
           <div className="login-form__input">
             <Field name="email" validate={composeValidators(required, maxLength(20), minLength(4))}>
               {({ input, meta }) => (
                 <div className="login-input__container">
-                  <input {...input} type="email" placeholder="email" className={`input ${meta.error && meta.touched && 'red'}`} />
+                  <input {...input} type="email" placeholder="Email" className={`input ${meta.error && meta.touched && 'red'}`} />
                   {meta.error && meta.touched && <span className="error">{meta.error}</span>}
                 </div>
               )}
@@ -65,7 +67,7 @@ const LoginForm = ({ onLogin, isLogged, loginTh }) => {
   );
 };
 
-const LoginPage = ({ onLogin, isLogged, loginTh }) => {
+const LoginPage = ({ onLogin, isLogged, loginTh, error }) => {
   // if (isLogged) {
   //   return <Redirect to="/profile" />;
   // }
@@ -73,7 +75,7 @@ const LoginPage = ({ onLogin, isLogged, loginTh }) => {
   return (
     <div className="login-page">
       {/* form */}
-      <LoginForm onLogin={onLogin} isLogged={isLogged} loginTh={loginTh} />
+      <LoginForm onLogin={onLogin} isLogged={isLogged} loginTh={loginTh} error={error} />
     </div>
   );
 };

@@ -11,6 +11,7 @@ class ProfileContainer extends Component {
     this.props.getStatusTh(userId);
   }
   render() {
+    console.log(this.id);
     return <Profile {...this.props} />;
   }
 }
@@ -19,6 +20,7 @@ const mapStateToProps = (state) => {
   return {
     postData: state.profile.postData,
     status: state.profile.status,
+    // userId: state.auth.id,
   };
 };
 const mapDispatchToProps = (dispatch) => {

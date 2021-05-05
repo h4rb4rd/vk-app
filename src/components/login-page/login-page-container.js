@@ -7,13 +7,14 @@ import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 import { loginTC } from '../../redux/auth-reducer';
 
-const LoginPageContainer = ({ onLogin, isLogged, loginTh }) => {
-  return <LoginPage onLogin={onLogin} isLogged={isLogged} loginTh={loginTh} />;
+const LoginPageContainer = ({ onLogin, isLogged, loginTh, error }) => {
+  return <LoginPage onLogin={onLogin} isLogged={isLogged} loginTh={loginTh} error={error} />;
 };
 
 const mapStateToProps = (state) => {
   return {
     isLogged: state.loginPage.isLogged,
+    error: state.auth.error,
   };
 };
 const mapDispatchToProps = (dispatch) => {

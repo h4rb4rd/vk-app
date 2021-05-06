@@ -5,8 +5,6 @@ import './login-page.css';
 import { Form, Field } from 'react-final-form';
 import { required, maxLength, composeValidators, minLength } from '../../utils/validators';
 
-import { FORM_ERROR } from 'final-form';
-
 const LoginForm = ({ onLogin, isLogged, loginTh, error }) => {
   return (
     <Form

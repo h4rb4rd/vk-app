@@ -5,7 +5,6 @@ import NavItem from './nav-item';
 import MessageItem from './message-item';
 import { Form, Field } from 'react-final-form';
 import { required, maxLength, composeValidators } from '../../utils/validators';
-import { reset } from 'redux-form';
 
 const MessagesForm = ({ addMessage }) => {
   return (

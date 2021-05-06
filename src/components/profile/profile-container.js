@@ -7,11 +7,10 @@ import { Component } from 'react';
 
 class ProfileContainer extends Component {
   componentDidMount() {
-    let userId = 16618;
-    this.props.getStatusTh(userId);
+    // let userId = 16618;
+    this.props.getStatusTh(this.props.userId);
   }
   render() {
-    console.log(this.id);
     return <Profile {...this.props} />;
   }
 }
@@ -20,7 +19,7 @@ const mapStateToProps = (state) => {
   return {
     postData: state.profile.postData,
     status: state.profile.status,
-    // userId: state.auth.id,
+    userId: state.auth.id,
   };
 };
 const mapDispatchToProps = (dispatch) => {

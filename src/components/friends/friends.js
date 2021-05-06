@@ -6,7 +6,6 @@ import avatar from '../../assets/images/avatar.png';
 import Preloader from '../preloader';
 
 const Friend = ({ friend, followTh, unfollowTh, inProgress }) => {
-  console.log(followTh);
   return (
     <div className="friends__container">
       {/* user */}

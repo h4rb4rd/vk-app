@@ -3,6 +3,14 @@ import { connect } from 'react-redux';
 
 import Friends from './friends';
 import { followTC, unfollowTC, setPageAC, toggleInProgressAC, getFriendsTC } from '../../redux/friends-reducer';
+import {
+  getCurrentPage,
+  getFriendsData,
+  getInProgress,
+  getIsFetching,
+  getPageSize,
+  getTotalCount,
+} from '../../redux/friends-selector';
 
 class FriendsApiComponent extends Component {
   componentDidMount() {
@@ -33,16 +41,28 @@ class FriendsApiComponent extends Component {
   }
 }
 
+// const mapStateToProps = (state) => {
+//   return {
+//     friends: state.friends.friendsData,
+//     pageSize: state.friends.pageSize,
+//     totalCount: state.friends.totalCount,
+//     currentPage: state.friends.currentPage,
+//     isFetching: state.friends.isFetching,
+//     inProgress: state.friends.inProgress,
+//   };
+// };
+
 const mapStateToProps = (state) => {
   return {
-    friends: state.friends.friendsData,
-    pageSize: state.friends.pageSize,
-    totalCount: state.friends.totalCount,
-    currentPage: state.friends.currentPage,
-    isFetching: state.friends.isFetching,
-    inProgress: state.friends.inProgress,
+    friends: getFriendsData(state),
+    pageSize: getPageSize(state),
+    totalCount: getTotalCount(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state),
+    inProgress: getInProgress(state),
   };
 };
+
 const mapDispatchToProps = (dispatch) => {
   return {
     followTh: (friendId) => {

@@ -181,10 +181,11 @@ export const toggleInProgressAC = (inProgress, userId) => {
   };
 };
 
-export const getFriendsTC = (currentPage, pageSize) => {
+export const getFriendsTC = (page, pageSize) => {
   return (dispatch) => {
     dispatch(toggleIsFetchingAC(true));
-    friendsApi.getFriends(currentPage, pageSize).then((data) => {
+    dispatch(setPageAC(page));
+    friendsApi.getFriends(page, pageSize).then((data) => {
       dispatch(toggleIsFetchingAC(false));
       dispatch(setFriendsAC(data.items));
       dispatch(setUsersCountAC(data.totalCount));

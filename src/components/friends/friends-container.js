@@ -5,7 +5,7 @@ import Friends from './friends';
 import { followTC, unfollowTC, setPageAC, toggleInProgressAC, getFriendsTC } from '../../redux/friends-reducer';
 import {
   getCurrentPage,
-  getFriendsData,
+  getFriendsDataSelector,
   getInProgress,
   getIsFetching,
   getPageSize,
@@ -54,7 +54,7 @@ class FriendsApiComponent extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    friends: getFriendsData(state),
+    friends: getFriendsDataSelector(state),
     pageSize: getPageSize(state),
     totalCount: getTotalCount(state),
     currentPage: getCurrentPage(state),

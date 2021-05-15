@@ -28,7 +28,8 @@ const MyPostsForm = ({ addPost }) => {
   );
 };
 
-const MyPosts = ({ postData, addPost }) => {
+const MyPosts = React.memo(({ postData, addPost }) => {
+  console.log('Render');
   return (
     <div>
       {/* form */}
@@ -42,5 +43,5 @@ const MyPosts = ({ postData, addPost }) => {
       </div>
     </div>
   );
-};
+});
 export default MyPosts;

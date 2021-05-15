@@ -3,6 +3,7 @@ import { profileApi } from '../dal/api';
 const Actions = {
   ADD_POST: 'ADD-POST',
   SET_STATUS: 'SET_STATUS',
+  DELETE_POST: 'DELETE_POST',
 };
 
 const initialState = {
@@ -27,6 +28,8 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         postData: [...state.postData, newObj],
       };
+    case Actions.DELETE_POST:
+      return { ...state, postData: state.postData.filter((post) => post.id !== action.postId) };
     case Actions.SET_STATUS:
       return { ...state, status: action.status };
     default:
@@ -63,4 +66,12 @@ export const updateStatusTC = (status) => {
     });
   };
 };
+
+export const deletePostAC = (postId) => {
+  return {
+    type: Actions.DELETE_POST,
+    postId,
+  };
+};
+
 export default profileReducer;

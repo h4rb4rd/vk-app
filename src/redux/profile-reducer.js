@@ -1,9 +1,9 @@
 import { profileApi } from '../dal/api';
 
 const Actions = {
-  ADD_POST: 'ADD-POST',
-  SET_STATUS: 'SET_STATUS',
-  DELETE_POST: 'DELETE_POST',
+  ADD_POST: 'profile/ADD-POST',
+  SET_STATUS: 'profile/SET_STATUS',
+  DELETE_POST: 'profile/DELETE_POST',
 };
 
 const initialState = {
@@ -51,19 +51,17 @@ export const setStatusAC = (status) => {
 };
 
 export const getStatusTC = (userId) => {
-  return (dispatch) => {
-    profileApi.getStatus(userId).then((res) => {
-      dispatch(setStatusAC(res.data));
-    });
+  return async (dispatch) => {
+    const res = await profileApi.getStatus(userId);
+    dispatch(setStatusAC(res.data));
   };
 };
 export const updateStatusTC = (status) => {
-  return (dispatch) => {
-    profileApi.updateStatus(status).then((res) => {
-      if (res.data.resultCode === 0) {
-        dispatch(setStatusAC(status));
-      }
-    });
+  return async (dispatch) => {
+    const res = await profileApi.updateStatus(status);
+    if (res.data.resultCode === 0) {
+      dispatch(setStatusAC(status));
+    }
   };
 };
 

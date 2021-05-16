@@ -1,5 +1,5 @@
 const Actions = {
-  SET_IS_LOGGED: 'SET_IS_LOGGED',
+  SET_IS_LOGGED: 'login/SET_IS_LOGGED',
 };
 
 const initialState = {

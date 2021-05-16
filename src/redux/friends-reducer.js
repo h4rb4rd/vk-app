@@ -1,13 +1,13 @@
 import { friendsApi } from '../dal/api';
 
 const Actions = {
-  FOLLOW: 'FOLLOW',
-  UNFOLLOW: 'UNFOLLOW',
-  SET_FRIENDS: 'SET_FRIENDS',
-  SET_PAGE: 'SET_PAGE',
-  FRIENDS_COUNT: 'FRIENDS_COUNT',
-  TOGGLE_IS_FETCHING: 'TOGGLE_IS_FETCHING',
-  TOGGLE_IN_PROGRESS: 'TOGGLE_IN_PROGRESS',
+  FOLLOW: 'friend/FOLLOW',
+  UNFOLLOW: 'friend/UNFOLLOW',
+  SET_FRIENDS: 'friend/SET_FRIENDS',
+  SET_PAGE: 'friend/SET_PAGE',
+  FRIENDS_COUNT: 'friend/FRIENDS_COUNT',
+  TOGGLE_IS_FETCHING: 'friend/TOGGLE_IS_FETCHING',
+  TOGGLE_IN_PROGRESS: 'friend/TOGGLE_IN_PROGRESS',
 };
 
 const initialState = {
@@ -182,36 +182,33 @@ export const toggleInProgressAC = (inProgress, userId) => {
 };
 
 export const getFriendsTC = (page, pageSize) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(toggleIsFetchingAC(true));
     dispatch(setPageAC(page));
-    friendsApi.getFriends(page, pageSize).then((data) => {
-      dispatch(toggleIsFetchingAC(false));
-      dispatch(setFriendsAC(data.items));
-      dispatch(setUsersCountAC(data.totalCount));
-    });
+    const data = await friendsApi.getFriends(page, pageSize);
+    dispatch(toggleIsFetchingAC(false));
+    dispatch(setFriendsAC(data.items));
+    dispatch(setUsersCountAC(data.totalCount));
   };
 };
+
+const followUnfollow = async (dispatch, friendId, apiMethod, actionCreator) => {
+  dispatch(toggleInProgressAC(true, friendId));
+  const data = await apiMethod(friendId);
+  if (data.resultCode == 0) {
+    dispatch(actionCreator(friendId));
+  }
+  dispatch(toggleInProgressAC(false, friendId));
+};
+
 export const followTC = (friendId) => {
-  return (dispatch) => {
-    dispatch(toggleInProgressAC(true, friendId));
-    friendsApi.follow(friendId).then((data) => {
-      if (data.resultCode == 0) {
-        dispatch(followAC(friendId));
-      }
-      dispatch(toggleInProgressAC(false, friendId));
-    });
+  return async (dispatch) => {
+    followUnfollow(friendId, dispatch, friendsApi.follow, followAC);
   };
 };
 export const unfollowTC = (friendId) => {
-  return (dispatch) => {
-    dispatch(toggleInProgressAC(true, friendId));
-    friendsApi.unfollow(friendId).then((data) => {
-      if (data.resultCode == 0) {
-        dispatch(unfollowAC(friendId));
-      }
-      dispatch(toggleInProgressAC(false, friendId));
-    });
+  return async (dispatch) => {
+    followUnfollow(friendId, dispatch, friendsApi.unfollow, unfollowAC);
   };
 };
 

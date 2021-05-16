@@ -1,8 +1,8 @@
 import { profileApi } from '../dal/api';
 
 const Actions = {
-  SET_USER_PROFILE: 'SET_USER_PROFILE',
-  SET_STATUS: 'SET_STATUS',
+  SET_USER_PROFILE: 'friend_prof/SET_USER_PROFILE',
+  SET_STATUS: 'friend_prof/SET_STATUS',
 };
 
 const initialState = {
@@ -31,10 +31,9 @@ export const setFriendProfileAC = (profile) => {
   };
 };
 export const getFriendProfileTC = (userId) => {
-  return (dispatch) => {
-    profileApi.getFriendProfile(userId).then((res) => {
-      dispatch(setFriendProfileAC(res.data));
-    });
+  return async (dispatch) => {
+    const res = await profileApi.getFriendProfile(userId);
+    dispatch(setFriendProfileAC(res.data));
   };
 };
 export const setStatusAC = (status) => {
@@ -45,11 +44,10 @@ export const setStatusAC = (status) => {
 };
 
 export const getStatusTC = (userId) => {
-  return (dispatch) => {
-    profileApi.getStatus(userId).then((res) => {
-      console.log(res.data);
-      dispatch(setStatusAC(res.data));
-    });
+  return async (dispatch) => {
+    const res = await profileApi.getStatus(userId);
+    console.log(res.data);
+    dispatch(setStatusAC(res.data));
   };
 };
 export default friendProfileReducer;

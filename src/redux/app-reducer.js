@@ -1,7 +1,7 @@
 import { getAuthUserDataTC } from './auth-reducer';
 
 const Actions = {
-  SET_INITIALIZED: 'SET_INITIALIZED',
+  SET_INITIALIZED: 'app/SET_INITIALIZED',
 };
 
 const initialState = {

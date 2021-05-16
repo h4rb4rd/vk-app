@@ -1,5 +1,5 @@
 const Actions = {
-  ADD_MESSAGE: 'ADD-MESSAGE',
+  ADD_MESSAGE: 'message/ADD-MESSAGE',
   id: 100,
 };
 

@@ -3,13 +3,14 @@ import './profile.css';
 
 import ProfileInfo from './profile-info';
 import MyPosts from './my-posts';
+import backgroundImg from '../../assets/images/citybg.jpg';
 
 const Profile = ({ postData, addPost, status, updateStatusTh }) => {
   return (
     <main className="profile">
       {/* image */}
       <div className="profile__image">
-        <img src="https://linkedinbackground.com/download/Night-City.jpg" alt="img" />
+        <img src={backgroundImg} alt="img" />
       </div>
       {/* content */}
       <div className="profile__content">

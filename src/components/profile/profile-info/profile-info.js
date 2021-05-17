@@ -2,6 +2,7 @@ import React from 'react';
 import './profile-info.css';
 
 import ProfileStatus from './profile-status';
+import avatar from '../../../assets/images/userAva.png';
 
 const ProfileInfo = ({ status, updateStatusTh }) => {
   return (
@@ -9,7 +10,7 @@ const ProfileInfo = ({ status, updateStatusTh }) => {
       {/* avatar */}
       <div className="profile-user__avatar">
         <a href="#">
-          <img src="https://www.drupal.org/files/user-pictures/picture-2204516-1469808304.png" alt="avatar" />
+          <img src={avatar} alt="avatar" />
         </a>
       </div>
       {/* status */}

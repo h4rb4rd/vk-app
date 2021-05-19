@@ -15,6 +15,10 @@ import { initializeAppTC } from '../../redux/app-reducer';
 import { compose } from 'redux';
 import Preloader from '../preloader';
 
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import store from '../../redux/redux-store';
+
 class App extends Component {
   componentDidMount() {
     this.props.initializeAppTh();
@@ -52,4 +56,15 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(App);
+const AppContainer = compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(App);
+
+const SocialApp = () => {
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    </BrowserRouter>
+  );
+};
+export default SocialApp;

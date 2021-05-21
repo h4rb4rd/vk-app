@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import './app.css';
 
@@ -7,8 +7,9 @@ import Aside from '../aside';
 import ProfileContainer from '../profile';
 import FriendProfileContainer from '../friend-profile';
 import Friends from '../friends';
-import MessagesContainer from '../messages';
+// import MessagesContainer from '../messages';
 import LoginPageContainer from '../login-page';
+
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { initializeAppTC } from '../../redux/app-reducer';
@@ -18,6 +19,9 @@ import Preloader from '../preloader';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import store from '../../redux/redux-store';
+import { withSuspense } from '../../hoc/withSuspense';
+
+const MessagesContainer = lazy(() => import('../messages'));
 
 class App extends Component {
   componentDidMount() {
@@ -38,7 +42,7 @@ class App extends Component {
           <Route render={() => <ProfileContainer />} path="/profile" />
           <Route render={() => <FriendProfileContainer />} path="/friend-profile/:userId" />
           <Route render={() => <Friends />} path="/friends" />
-          <Route render={() => <MessagesContainer />} path="/messages" />
+          <Route render={withSuspense(MessagesContainer)} path="/messages" />
         </div>
       </>
     );

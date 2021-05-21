@@ -3,6 +3,7 @@ import './friend-profile.css';
 import avatar from '../../assets/images/avatar.png';
 
 import Preloader from '../preloader';
+import backgroundImg from '../../assets/images/citybg.jpg';
 
 const FriendProfileInfo = ({ profile, status }) => {
   console.log(status);
@@ -72,7 +73,7 @@ const FriendProfile = ({ postData, profile, status }) => {
     <main className="friend-profile">
       {/* image */}
       <div className="friend-profile__image">
-        <img src="https://linkedinbackground.com/download/Night-City.jpg" alt="img" />
+        <img src={backgroundImg} alt="img" />
       </div>
       {/* content */}
       {profile ? (

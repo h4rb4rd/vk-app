@@ -5,7 +5,7 @@ import ProfileInfo from './profile-info';
 import MyPosts from './my-posts';
 import backgroundImg from '../../assets/images/citybg.jpg';
 
-const Profile = ({ postData, addPost, status, updateStatusTh }) => {
+const Profile = ({ postData, addPost, status, profile, updateStatusTh, savePhotoTh }) => {
   return (
     <main className="profile">
       {/* image */}
@@ -15,7 +15,12 @@ const Profile = ({ postData, addPost, status, updateStatusTh }) => {
       {/* content */}
       <div className="profile__content">
         {/* user (ava+description)*/}
-        <ProfileInfo status={status} updateStatusTh={updateStatusTh} />
+        <ProfileInfo
+          status={status}
+          profile={profile}
+          updateStatusTh={updateStatusTh}
+          savePhotoTh={savePhotoTh}
+        />
         {/* posts */}
         <MyPosts postData={postData} addPost={addPost} />
       </div>

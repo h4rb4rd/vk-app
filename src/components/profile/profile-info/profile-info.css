@@ -1,8 +1,9 @@
 .profile-user__avatar {
+  position: relative;
   width: 150px;
   border-radius: 50%;
   overflow: hidden;
-  margin: 0px 0px 30px 0px;
+  margin: 0px 0px 10px 0px;
 }
 .profile-info {
   font-size: 14px;

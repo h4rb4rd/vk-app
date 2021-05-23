@@ -12,7 +12,7 @@ const FriendProfileInfo = ({ profile, status }) => {
       {/* avatar */}
       <div className="profile-user__avatar">
         <a href="#">
-          <img src={profile.photos.large != null ? profile.photos.large : avatar} alt="ava" />
+          <img src={profile.photos.large || profile.photos.small || avatar} alt="ava" />
         </a>
       </div>
       <div className="friend-profile__status friend-status">

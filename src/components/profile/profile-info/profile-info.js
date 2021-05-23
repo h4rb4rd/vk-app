@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './profile-info.css';
 
 import ProfileStatus from './profile-status';
 import avatar from '../../../assets/images/userAva.png';
+import FileUpload from '../../file-upload';
 
-const ProfileInfo = ({ status, updateStatusTh }) => {
+const ProfileInfo = ({ status, profile, updateStatusTh, savePhotoTh }) => {
+  const [editMode, setEditMode] = useState(false);
+  const editModeOn = () => {
+    setEditMode(true);
+  };
+
+  const editModeOff = () => {
+    setEditMode(false);
+  };
+
+  const onPhotoChange = (e) => {
+    if (e.target.files.length) {
+      savePhotoTh(e.target.files[0]);
+    }
+  };
   return (
     <div className="profile__user profile-user">
       {/* avatar */}
-      <div className="profile-user__avatar">
+      <div className="profile-user__avatar" onMouseEnter={editModeOn} onMouseLeave={editModeOff}>
         <a href="#">
-          <img src={avatar} alt="avatar" />
+          <img src={profile.photos.large || avatar} alt="avatar" />
         </a>
+        {editMode && <FileUpload onPhotoChange={onPhotoChange} text={'Update photo'} />}
       </div>
       {/* status */}
       <ProfileStatus status={status} updateStatusTh={updateStatusTh} />

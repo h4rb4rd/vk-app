@@ -12,7 +12,7 @@ const Friend = ({ friend, followTh, unfollowTh, inProgress }) => {
       <div className="friends__user friends-user">
         <div className="friends-user__ava">
           <NavLink to={`/friend-profile/${friend.id}`}>
-            <img src={friend.photo != null ? friend.photo : avatar} alt="ava" />
+            <img src={friend.photos.small || friend.photos.large || avatar} alt="ava" />
           </NavLink>
         </div>
         <div className="friends-user__buttons">

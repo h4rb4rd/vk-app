@@ -10,8 +10,10 @@ class FriendProfileContainer extends Component {
     this.props.getFriendProfileTh(userId);
     this.props.getStatusTh(userId);
   }
+
   render() {
     const { profile, postData, status } = this.props;
+
     return (
       <div>
         <FriendProfile {...this.props} profile={profile} postData={postData} status={status} />

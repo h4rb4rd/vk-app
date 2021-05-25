@@ -8,6 +8,7 @@ import {
   updateStatusTC,
   savePhotoTC,
   getFriendProfileTC,
+  saveProfileDataTC,
 } from '../../redux/profile-reducer';
 import { Component } from 'react';
 
@@ -18,7 +19,11 @@ class ProfileContainer extends Component {
   }
 
   render() {
-    return <Profile {...this.props} />;
+    return (
+      <div>
+        <Profile {...this.props} />
+      </div>
+    );
   }
 }
 
@@ -46,6 +51,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     getFriendProfileTh: (userId) => {
       dispatch(getFriendProfileTC(userId));
+    },
+    saveProfileDataTh: (data) => {
+      dispatch(saveProfileDataTC(data));
     },
   };
 };

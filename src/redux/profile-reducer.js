@@ -36,7 +36,6 @@ const profileReducer = (state = initialState, action) => {
     case Actions.SET_STATUS:
       return { ...state, status: action.status };
     case Actions.SAVE_PHOTO_SUCCESS: {
-      debugger;
       return { ...state, profile: { ...state.profile, photos: action.photos } };
     }
     case Actions.SET_USER_PROFILE:
@@ -108,6 +107,16 @@ export const getFriendProfileTC = (userId) => {
   return async (dispatch) => {
     const res = await profileApi.getFriendProfile(userId);
     dispatch(setFriendProfileAC(res.data));
+  };
+};
+
+export const saveProfileDataTC = (data) => {
+  return async (dispatch, getState) => {
+    const userId = getState().auth.id;
+    const res = await profileApi.saveProfile(data);
+    if (res.data.resultCode === 0) {
+      dispatch(getFriendProfileTC(userId));
+    }
   };
 };
 

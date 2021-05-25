@@ -6,9 +6,15 @@
   margin: 0px 0px 10px 0px;
 }
 .profile-info {
+  position: relative;
+  display: inline-block;
   font-size: 14px;
   color: #222;
   margin: 0px 0px 50px 0px;
+  transition: all 0.3s ease 0s;
+}
+.profile-info__list {
+  margin: 0px 0px 20px 0px;
 }
 .profile-info__list li:not(:last-child) {
   margin: 0px 0px 10px 0px;
@@ -16,9 +22,91 @@
 
 .profile-info__item span {
   font-weight: 700;
+  margin: 0px 10px 0px 0px;
 }
 
 .profile-info__item a {
   text-decoration: underline;
   color: #222;
+}
+.profile-info__button {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  width: 70px;
+  height: 35px;
+  border-radius: 10px;
+  border: none;
+  background-color: #2196f3;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease 0s;
+}
+.profile-info__button:hover,
+.save-data__button:hover {
+  background-color: #1565c0;
+}
+.profile-info:hover .profile-info__button {
+  display: block;
+}
+.profile-info:hover {
+  background-color: #cecece;
+}
+.save-data__button {
+  align-self: center;
+  cursor: pointer;
+  width: 50px;
+  height: 25px;
+  border-radius: 10px;
+  border: none;
+  background-color: #2196f3;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease 0s;
+  margin: 10px 0px 0px 0px;
+}
+.profile-data__form {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0px 0px 20px 0px;
+}
+.profile-data__input input {
+  width: 220px;
+  height: 30px;
+  border: 1px dashed #8b7575;
+  font-size: 16px;
+  padding: 5px;
+  margin: 0px 0px 5px 0px;
+}
+.profile-data__checkbox {
+  border: 1px dashed #8b7575;
+  padding: 5px;
+  color: #8b7575;
+  font-size: 16px;
+  margin: 0px 0px 5px 0px;
+}
+.profile-data__checkbox label {
+  margin: 0px 10px 0px 0px;
+}
+
+.profile-data__input input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.profile-data__input input:focus::-moz-placeholder {
+  color: transparent;
+}
+
+.profile-data__input input:focus:-moz-placeholder {
+  color: transparent;
+}
+
+.profile-data__input input:focus:-ms-input-placeholder {
+  color: transparent;
 }

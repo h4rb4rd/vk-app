@@ -46,7 +46,6 @@ export const setStatusAC = (status) => {
 export const getStatusTC = (userId) => {
   return async (dispatch) => {
     const res = await profileApi.getStatus(userId);
-    console.log(res.data);
     dispatch(setStatusAC(res.data));
   };
 };

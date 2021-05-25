@@ -34,12 +34,16 @@
   color: #222;
   margin: 0px 0px 50px 0px;
 }
+.friend-info__list {
+  margin: 0px 0px 20px 0px;
+}
 .friend-info__list li:not(:last-child) {
   margin: 0px 0px 10px 0px;
 }
 
 .friend-info__item span {
   font-weight: 700;
+  margin: 0px 5px 0px 0px;
 }
 
 .friend-info__item a {
@@ -118,4 +122,7 @@
 
 .friend-status__text {
   font-size: 14px;
+}
+.contacts__title {
+  margin: 0px 0px 10px 0px;
 }

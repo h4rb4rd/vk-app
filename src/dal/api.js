@@ -55,4 +55,7 @@ export const profileApi = {
       },
     });
   },
+  saveProfile(data) {
+    return instance.put(`profile`, data);
+  },
 };

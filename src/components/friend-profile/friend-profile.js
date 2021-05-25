@@ -6,7 +6,6 @@ import Preloader from '../preloader';
 import backgroundImg from '../../assets/images/citybg.jpg';
 
 const FriendProfileInfo = ({ profile, status }) => {
-  console.log(status);
   return (
     <div className="friend-profile__user friend-user">
       {/* avatar */}
@@ -23,37 +22,43 @@ const FriendProfileInfo = ({ profile, status }) => {
         <ul className="friend-info__list">
           <li>
             <p className="friend-info__item">
-              <span>Username: </span>
+              <span>Name:</span>
               {profile.fullName}
             </p>
           </li>
           <li>
             <p className="friend-info__item">
-              <span>ID: </span>
-              {profile.userId}
+              <span>Looking for a job:</span>
+              {profile.lookingForAJob ? 'yes' : 'no'}
             </p>
           </li>
           <li>
             <p className="friend-info__item">
-              <span>VK: </span>
-              {profile.contacts.vk}
-            </p>
-          </li>
-          <li>
-            <p className="friend-info__item">
-              <span>Description: </span>
+              <span>Professional skills:</span>
               {profile.lookingForAJobDescription}
             </p>
           </li>
-          <li>
-            <p className="friend-info__item">
-              <span>Web Site: </span>
-              {profile.contacts.website}
-            </p>
-          </li>
+        </ul>
+        <h3 className="contacts__title">Contacts:</h3>
+        <ul className="friend-info__list ">
+          {Object.keys(profile.contacts).map((key) => {
+            return <FriendContacts contactTitle={key} contactValue={profile.contacts[key]} />;
+          })}
         </ul>
       </div>
     </div>
+  );
+};
+const FriendContacts = ({ contactTitle, contactValue }) => {
+  return (
+    <li>
+      {contactValue && (
+        <p className="friend-info__item">
+          <span>{contactTitle}:</span>
+          {contactValue}
+        </p>
+      )}
+    </li>
   );
 };
 

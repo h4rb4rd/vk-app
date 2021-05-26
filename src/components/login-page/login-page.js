@@ -5,11 +5,11 @@ import './login-page.css';
 import { Form, Field } from 'react-final-form';
 import { required, maxLength, composeValidators, minLength } from '../../utils/validators';
 
-const LoginForm = ({ onLogin, isLogged, loginTh, error }) => {
+const LoginForm = ({ onLogin, isLogged, loginTh, error, captchaUrl }) => {
   return (
     <Form
-      onSubmit={({ email, password, rememberMe }) => {
-        loginTh(email, password, rememberMe);
+      onSubmit={({ email, password, rememberMe, captcha }) => {
+        loginTh(email, password, rememberMe, captcha);
       }}
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit} className="login-page__form login-form">
@@ -18,14 +18,22 @@ const LoginForm = ({ onLogin, isLogged, loginTh, error }) => {
             <Field name="email" validate={composeValidators(required, maxLength(20), minLength(4))}>
               {({ input, meta }) => (
                 <div className="login-input__container">
-                  <input {...input} type="email" placeholder="Email" className={`input ${meta.error && meta.touched && 'red'}`} />
+                  <input
+                    {...input}
+                    type="email"
+                    placeholder="Email"
+                    className={`input ${meta.error && meta.touched && 'red'}`}
+                  />
                   {meta.error && meta.touched && <span className="error">{meta.error}</span>}
                 </div>
               )}
             </Field>
           </div>
           <div className="login-form__input">
-            <Field name="password" validate={composeValidators(required, maxLength(15), minLength(4))}>
+            <Field
+              name="password"
+              validate={composeValidators(required, maxLength(15), minLength(4))}
+            >
               {({ input, meta }) => (
                 <div className="login-input__container">
                   <input
@@ -39,6 +47,28 @@ const LoginForm = ({ onLogin, isLogged, loginTh, error }) => {
               )}
             </Field>
           </div>
+          {captchaUrl && <img src={captchaUrl} alt="captcha" />}
+          {captchaUrl && (
+            <div className="login-form__input">
+              <Field
+                name="captcha"
+                validate={composeValidators(required, maxLength(20), minLength(3))}
+              >
+                {({ input, meta }) => (
+                  <div className="login-input__container">
+                    <input
+                      {...input}
+                      type="text"
+                      placeholder="Enter captcha"
+                      className={`input ${meta.error && meta.touched && 'red'}`}
+                    />
+                    {meta.error && meta.touched && <span className="error">{meta.error}</span>}
+                  </div>
+                )}
+              </Field>
+            </div>
+          )}
+
           <div className="login-form__checkbox">
             <Field name="rememberMe" type="checkbox" validate={required}>
               {({ input, meta }) => (
@@ -65,7 +95,7 @@ const LoginForm = ({ onLogin, isLogged, loginTh, error }) => {
   );
 };
 
-const LoginPage = ({ onLogin, isLogged, loginTh, error }) => {
+const LoginPage = ({ onLogin, isLogged, loginTh, error, captchaUrl }) => {
   // if (isLogged) {
   //   return <Redirect to="/profile" />;
   // }
@@ -73,7 +103,13 @@ const LoginPage = ({ onLogin, isLogged, loginTh, error }) => {
   return (
     <div className="login-page">
       {/* form */}
-      <LoginForm onLogin={onLogin} isLogged={isLogged} loginTh={loginTh} error={error} />
+      <LoginForm
+        onLogin={onLogin}
+        isLogged={isLogged}
+        loginTh={loginTh}
+        error={error}
+        captchaUrl={captchaUrl}
+      />
     </div>
   );
 };

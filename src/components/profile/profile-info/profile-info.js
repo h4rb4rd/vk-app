@@ -137,8 +137,14 @@ const ProfileInfoData = ({ profile, setProfileDataEditMode }) => {
         </li>
         <li>
           <p className="profile-info__item">
-            <span>Professional skills:</span>
+            <span>Description:</span>
             {profile.lookingForAJobDescription}
+          </p>
+        </li>
+        <li>
+          <p className="profile-info__item">
+            <span>profession skills:</span>
+            {profile.aboutMe}
           </p>
         </li>
       </ul>
